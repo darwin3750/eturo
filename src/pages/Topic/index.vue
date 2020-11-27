@@ -5,12 +5,14 @@
 </template>
 
 <script>
-import { topicCollection } from '../../firebase'
-import { topicConverter } from '../models/topic'
+import { topicCollection } from '../../../firebase'
+import { topicConverter } from '../../models/topic'
+
 export default {
   data() {
     return {
       currentTopic: {},
+      isModerator: false,
     }
   },
   beforeMount() {
@@ -22,6 +24,7 @@ export default {
           alert("Topic does not exist")
         } else {
           this.currentTopic = topic.data()
+          this.isModerator = this.currentTopic.isModerator(this.$store.getters.currentUser.uid)
         }
       })
   }, // beforeMount

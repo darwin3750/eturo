@@ -1,6 +1,6 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import { db } from '../../firebase'
+import { topicCollection } from '../../firebase'
 import moment from 'moment'
 
 class TopicModel {
@@ -10,6 +10,16 @@ class TopicModel {
     this.description = description
     this.createdAt = moment(createdAt).calendar()
     this.createdBy = 'me'
+  }
+
+  // checks if a user is a moderator of this topic
+  isModerator(userId) {
+    let mod = false
+    topicCollection.doc(this.id).collection('moderators').doc(userId).get()
+      .then(snapshot => {
+        mod = snapshot
+      })
+    return mod
   }
 
 }
