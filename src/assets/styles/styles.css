@@ -24,13 +24,65 @@
   src: url(Inter/Inter-Black-slnt=0.ttf);
 }
 
+.theme1 {
+  --eturo-base: #235D3A ;
+  --eturo-main: #73C088 ;
+
+  --eturo-main-pos1: #62A474 ;
+  --eturo-main-pos2: #528961 ;
+  --eturo-main-pos3: #416D4D ;
+  --eturo-main-pos4: #235D3A ;
+  --eturo-main-pos5: #203626 ;
+  --eturo-main-pos6: #101B13 ;
+
+  --eturo-main-neg1: #87C999 ;
+  --eturo-main-neg2: #9BD2AA ;
+  --eturo-main-neg3: #AFDBBB ;
+  --eturo-main-neg4: #C8EAD1 ;
+  --eturo-main-neg5: #D7EDDD ;
+  --eturo-main-neg6: #EBF6EE ;
+  
+  --gang-gang-accent1 : #A673C0;
+  --gang-gang-accent2 : #C073AB;
+  --gang-gang-accent3 : #C0737C;
+
+  --gang-gang-contrast : #fff;
+}
+.theme2 {
+  --eturo-base: #264653 ;
+  --eturo-main: #2A9D8F ;
+
+  --eturo-main-pos1: #24867A ;
+  --eturo-main-pos2: #1E7066 ;
+  --eturo-main-pos3: #185951 ;
+  --eturo-main-pos4: #12433D ;
+  --eturo-main-pos5: #0C2C28 ;
+  --eturo-main-pos6: #051614 ;
+
+  --eturo-main-neg1: #48AB9F ;
+  --eturo-main-neg2: #66B9AF ;
+  --eturo-main-neg3: #85C7BF ;
+  --eturo-main-neg4: #A3D5CF ;
+  --eturo-main-neg5: #C2E3DF ;
+  --eturo-main-neg6: #E0F1EF ;
+
+  --gang-gang-accent1 : #E9C46A;
+  --gang-gang-accent2 : #F4A261;
+  --gang-gang-accent3 : #E76F51;
+
+  --gang-gang-contrast : #fff;
+}
+
 :root{
   font-size: 16px;
+  font-family: InterRegular;
+  color: var(--gang-gang-contrast);
 }
 
-.dark-theme {
-
+.text-contrast{
+  color: var(--gang-gang-contrast) !important;
 }
-.light-theme {
 
+.border-contrast{
+  border-color: var(--gang-gang-contrast) !important;
 }
