@@ -7,6 +7,11 @@
     >
 
       <div class="form-group">
+        <label> Display Name: </label>
+        <input class="form-control" type="text" v-model="displayName" autocomplete="username" required/>
+      </div>
+
+      <div class="form-group">
         <label> Email: </label>
         <input class="form-control" type="email" v-model="email" autocomplete="email" />
       </div>
@@ -37,11 +42,13 @@
 </template>
 
 <script>
-import { auth } from '../../firebase'
+import { auth, userCollection } from '../../firebase'
+import { userConverter } from '../models/user'
 
 export default {
   data() {
     return {
+      displayName: "",
       email: "",
       password: "",
       passwordConfirmation: "",
@@ -53,6 +60,22 @@ export default {
       if (this.password === this.passwordConfirmation) {
         auth.createUserWithEmailAndPassword(this.email, this.password)
           .then(() => {
+            // update profile of successfully created user (displayname)
+            auth.currentUser.updateProfile({
+              displayName: this.displayName,
+            })
+          })
+          .then(() => {
+            // add the authenticated user to the users collection
+            userCollection.doc(auth.currentUser.uid).set(
+              userConverter.toFirestore({
+                displayName: this.displayName,
+                email: this.email,
+              })
+            )
+          })
+          .then(() => {
+            // toggle state and navigate
             this.$store.commit('toggleCurrentUser')
             this.$router.push({ path: "/" })
           })

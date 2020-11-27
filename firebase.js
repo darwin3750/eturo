@@ -20,10 +20,12 @@ const auth = firebase.auth()
 
 // collection references
 const userCollection = db.collection('users')
+const topicCollection = db.collection('topics')
 
 // utilities and references
 export {
   db,
   auth,
   userCollection,
+  topicCollection,
 }
