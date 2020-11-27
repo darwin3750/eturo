@@ -6,6 +6,11 @@ import Home from '../pages/Home'
 import Login from '../pages/Login'
 import Signup from '../pages/Signup'
 
+import vClickOutside from 'v-click-outside'
+import inViewportDirective from 'vue-in-viewport-directive'
+
+Vue.directive('in-viewport', inViewportDirective)
+Vue.use(vClickOutside)
 Vue.use(Router)
 
 const routes = [

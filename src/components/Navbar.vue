@@ -29,27 +29,23 @@
 
         <!-- sign in button -->
         <b-nav-item class="nav-link p-0" v-if="!loggedIn" to="/login">
-          <button class="text-left btn btn-lg text-contrast">
+          <div class="text-left btn btn-lg text-contrast">
             <b-icon icon="box-arrow-in-right"></b-icon>
             Sign In
-          </button>
+          </div>
         </b-nav-item>
         <!-- Profile -->
-        <b-nav-item class="" v-else v-click-outside="closeProfile" @click="viewProfileMenu = true">
+        <b-nav-item class="nav-link p-0" v-else v-click-outside="closeProfile" @click="viewProfileMenu = true">
           <!-- Profile button in navbar -->
-          <a href="#" class="nav-link">
-            Theme
-            <b-icon font-scale="0.6" 
-              class="align-middle" 
-              icon="caret-down-fill" 
-              variant="">
-            </b-icon>
-          </a>
+          <button class="text-left btn btn-lg text-contrast">
+            <b-icon icon="person-circle"></b-icon>
+            Profile
+          </button>
           <!-- Profile menu itself -->
           <transition name="fade">
-            <div v-if="choosingTheme" class="shadow card p-3 position-absolute" id="theme-dropdown">
-              <a class="d-block w-100 p-2" href="#" @click="lighten">Light</a>
-              <a class="d-block w-100 p-2" href="#" @click="darken">Dark</a>
+            <div v-if="viewProfileMenu" class="shadow card p-3 position-absolute" id="">
+              <a class="d-block w-100 p-2" href="#" >Light</a>
+              <a class="d-block w-100 p-2" href="#" >Dark</a>
             </div>
           </transition>
         </b-nav-item>
@@ -61,21 +57,17 @@
           </button>
         </b-nav-item>
         <!-- Notifications -->
-        <b-nav-item class="" v-else v-click-outside="closeNotifications" @click="viewNotificationsMenu = true">
+        <b-nav-item class="nav-link p-0" v-else v-click-outside="closeNotifications" @click="viewNotificationsMenu = true">
           <!-- Notifications button in navbar -->
-          <a href="#" class="nav-link">
-            Theme
-            <b-icon font-scale="0.6" 
-              class="align-middle" 
-              icon="caret-down-fill" 
-              variant="">
-            </b-icon>
-          </a>
+          <button class="text-left btn btn-lg text-contrast">
+            <b-icon icon="bell-fill"></b-icon>
+            Notifications
+          </button>
           <!-- Notifications menu itself -->
           <transition name="fade">
-            <div v-if="choosingTheme" class="shadow card p-3 position-absolute" id="theme-dropdown">
-              <a class="d-block w-100 p-2" href="#" @click="lighten">Light</a>
-              <a class="d-block w-100 p-2" href="#" @click="darken">Dark</a>
+            <div v-if="viewNotificationsMenu" class="shadow card p-3 position-absolute" id="">
+              <a class="d-block w-100 p-2" href="#" >Light</a>
+              <a class="d-block w-100 p-2" href="#" >Dark</a>
             </div>
           </transition>
         </b-nav-item>
@@ -95,6 +87,12 @@ export default {
       'loggedIn'
     ])
   },
+  data() {
+    return {
+      viewProfileMenu: false,
+      viewNotificationsMenu: false,
+    }
+  },
   methods: {
     logout() {
       auth.signOut()
@@ -105,6 +103,12 @@ export default {
         .catch(() => {
           alert("Failed to logout! Must be your internet connection...")
         })
+    },
+    closeNotifications(){
+      this.viewNotificationsMenu = false;
+    },
+    closeProfile(){
+      this.viewProfileMenu = false;
     }
   }, // methods
 }
@@ -131,5 +135,10 @@ export default {
   }
   .navbar-search{
     min-width: 400px;
+  }
+  .eturo-btn-transparent{
+    color: var(--gang-gang-contrast) !important;
+    border-color: var(--gang-gang-contrast) !important;
+    background: rgba(0,0,0,0) !important;
   }
 </style>
