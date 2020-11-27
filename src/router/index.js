@@ -6,7 +6,9 @@ import Home from '../pages/Home'
 import Profile from '../pages/Profile/'
 import Login from '../pages/Login'
 import Signup from '../pages/Signup'
+
 import Topic from '../pages/Topic'
+import TopicNew from '../pages/Topic/New'
 
 import vClickOutside from 'v-click-outside'
 import inViewportDirective from 'vue-in-viewport-directive'
@@ -40,6 +42,14 @@ const routes = [
     component: Signup,
     meta: {
       forbidsAuth: true,
+    }
+  },
+  {
+    path: '/t/new',
+    name: 'TopicNew',
+    component: TopicNew,
+    meta: {
+      requiresAuth: true,
     }
   },
   {
