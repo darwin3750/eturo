@@ -19,7 +19,7 @@
     </section>
   </div>
   <div v-else>
-    <h1 class="text-center"> Looks like this individual doesn't exist :( </h1>
+    <h1 class="text-center mt-4"> {{ msg }} </h1>
   </div>
 </template>
 
@@ -31,12 +31,17 @@ export default {
   beforeMount() {
     const userId = this.$route.params.uid
     userCollection.doc(userId).withConverter(userConverter).get().then(snapshot => {
+      if(!snapshot.exists) {
+        this.msg = "Looks like that user doesn't exist!"
+        return
+      }
       this.user = snapshot.data()
     })
   },
   data() {
     return {
       user: null,
+      msg: "Loading user data..."
     }
   },
   components: {

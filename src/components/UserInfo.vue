@@ -24,7 +24,6 @@ export default {
   beforeMount() {
     this.owner = this.currentUser.uid === this.$route.params.uid
     const { displayName, bio } = this.user
-    console.log(this.user)
     this.displayName = displayName || ""
     this.bio = bio || ""
   },
