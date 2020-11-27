@@ -42,11 +42,11 @@
   --eturo-main-neg5: #D7EDDD ;
   --eturo-main-neg6: #EBF6EE ;
   
-  --gang-gang-accent1 : #A673C0;
-  --gang-gang-accent2 : #C073AB;
-  --gang-gang-accent3 : #C0737C;
+  --eturo-accent1 : #A673C0;
+  --eturo-accent2 : #C073AB;
+  --eturo-accent3 : #C0737C;
 
-  --gang-gang-contrast : #fff;
+  --eturo-contrast : #fff;
 }
 .theme2 {
   --eturo-base: #264653 ;
@@ -66,23 +66,23 @@
   --eturo-main-neg5: #C2E3DF ;
   --eturo-main-neg6: #E0F1EF ;
 
-  --gang-gang-accent1 : #E9C46A;
-  --gang-gang-accent2 : #F4A261;
-  --gang-gang-accent3 : #E76F51;
+  --eturo-accent1 : #E9C46A;
+  --eturo-accent2 : #F4A261;
+  --eturo-accent3 : #E76F51;
 
-  --gang-gang-contrast : #fff;
+  --eturo-contrast : #fff;
 }
 
 :root{
   font-size: 16px;
   font-family: InterRegular;
-  color: var(--gang-gang-contrast);
+  color: var(--eturo-contrast);
 }
 
 .text-contrast{
-  color: var(--gang-gang-contrast) !important;
+  color: var(--eturo-contrast) !important;
 }
 
 .border-contrast{
-  border-color: var(--gang-gang-contrast) !important;
+  border-color: var(--eturo-contrast) !important;
 }

@@ -29,23 +29,23 @@
 
         <!-- sign in button -->
         <b-nav-item class="nav-link p-0" v-if="!loggedIn" to="/login">
-          <div class="text-left btn btn-lg text-contrast">
+          <button class="text-left btn btn-lg text-contrast">
             <b-icon icon="box-arrow-in-right"></b-icon>
             Sign In
-          </div>
+          </button>
         </b-nav-item>
         <!-- Profile -->
         <b-nav-item class="nav-link p-0" v-else v-click-outside="closeProfile" @click="viewProfileMenu = true">
           <!-- Profile button in navbar -->
           <button class="text-left btn btn-lg text-contrast">
             <b-icon icon="person-circle"></b-icon>
-            Profile
+            User
           </button>
           <!-- Profile menu itself -->
           <transition name="fade">
-            <div v-if="viewProfileMenu" class="shadow card p-3 position-absolute" id="">
-              <a class="d-block w-100 p-2" href="#" >Light</a>
-              <a class="d-block w-100 p-2" href="#" >Dark</a>
+            <div v-if="viewProfileMenu" class="shadow card p-3 position-absolute eturo-dropdown-menu" id="">
+              <router-link class="nav-link" to="/profile">Profile</router-link>
+              <a class="nav-link" @click.prevent @click="logout">Sign Out</a>
             </div>
           </transition>
         </b-nav-item>
@@ -65,15 +65,13 @@
           </button>
           <!-- Notifications menu itself -->
           <transition name="fade">
-            <div v-if="viewNotificationsMenu" class="shadow card p-3 position-absolute" id="">
-              <a class="d-block w-100 p-2" href="#" >Light</a>
-              <a class="d-block w-100 p-2" href="#" >Dark</a>
+            <div v-if="viewNotificationsMenu" class="shadow card p-3 position-absolute eturo-dropdown-menu" id="">
+              <!-- <Notification /> -->
             </div>
           </transition>
         </b-nav-item>
       </b-navbar-nav>
     </b-collapse>
-    <!-- <b-nav-item class="nav-link" v-else to="/login">Sign Out</b-nav-item> -->
   </b-navbar>
 </template>
 
@@ -136,9 +134,8 @@ export default {
   .navbar-search{
     min-width: 400px;
   }
-  .eturo-btn-transparent{
-    color: var(--gang-gang-contrast) !important;
-    border-color: var(--gang-gang-contrast) !important;
-    background: rgba(0,0,0,0) !important;
+  .eturo-dropdown-menu{
+    background-color: var(--eturo-contrast);
+    color: var(--eturo-base)
   }
 </style>
