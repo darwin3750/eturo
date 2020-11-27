@@ -48,7 +48,8 @@
 
   --eturo-contrast : #fff;
 }
-.theme2 {
+/* .theme2 { */
+:root{
   --eturo-base: #264653 ;
   --eturo-main: #2A9D8F ;
 
@@ -71,18 +72,106 @@
   --eturo-accent3 : #E76F51;
 
   --eturo-contrast : #fff;
-}
 
+  --eturo-bg1 : url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 1500'%3E%3Cdefs%3E%3Crect stroke='%23e0f1ef' stroke-width='0.76' width='1' height='1' id='s'/%3E%3Cpattern id='a' width='3' height='3' patternUnits='userSpaceOnUse' patternTransform='rotate(26 1000 750) scale(39.05) translate(-974.39 -730.79)'%3E%3Cuse fill='%23dcecea' href='%23s' y='2'/%3E%3Cuse fill='%23dcecea' href='%23s' x='1' y='2'/%3E%3Cuse fill='%23d7e7e5' href='%23s' x='2' y='2'/%3E%3Cuse fill='%23d7e7e5' href='%23s'/%3E%3Cuse fill='%23d3e3e1' href='%23s' x='2'/%3E%3Cuse fill='%23d3e3e1' href='%23s' x='1' y='1'/%3E%3C/pattern%3E%3Cpattern id='b' width='7' height='11' patternUnits='userSpaceOnUse' patternTransform='rotate(26 1000 750) scale(39.05) translate(-974.39 -730.79)'%3E%3Cg fill='%23cededc'%3E%3Cuse href='%23s'/%3E%3Cuse href='%23s' y='5' /%3E%3Cuse href='%23s' x='1' y='10'/%3E%3Cuse href='%23s' x='2' y='1'/%3E%3Cuse href='%23s' x='2' y='4'/%3E%3Cuse href='%23s' x='3' y='8'/%3E%3Cuse href='%23s' x='4' y='3'/%3E%3Cuse href='%23s' x='4' y='7'/%3E%3Cuse href='%23s' x='5' y='2'/%3E%3Cuse href='%23s' x='5' y='6'/%3E%3Cuse href='%23s' x='6' y='9'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='h' width='5' height='13' patternUnits='userSpaceOnUse' patternTransform='rotate(26 1000 750) scale(39.05) translate(-974.39 -730.79)'%3E%3Cg fill='%23cededc'%3E%3Cuse href='%23s' y='5'/%3E%3Cuse href='%23s' y='8'/%3E%3Cuse href='%23s' x='1' y='1'/%3E%3Cuse href='%23s' x='1' y='9'/%3E%3Cuse href='%23s' x='1' y='12'/%3E%3Cuse href='%23s' x='2'/%3E%3Cuse href='%23s' x='2' y='4'/%3E%3Cuse href='%23s' x='3' y='2'/%3E%3Cuse href='%23s' x='3' y='6'/%3E%3Cuse href='%23s' x='3' y='11'/%3E%3Cuse href='%23s' x='4' y='3'/%3E%3Cuse href='%23s' x='4' y='7'/%3E%3Cuse href='%23s' x='4' y='10'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='c' width='17' height='13' patternUnits='userSpaceOnUse' patternTransform='rotate(26 1000 750) scale(39.05) translate(-974.39 -730.79)'%3E%3Cg fill='%23cad9d7'%3E%3Cuse href='%23s' y='11'/%3E%3Cuse href='%23s' x='2' y='9'/%3E%3Cuse href='%23s' x='5' y='12'/%3E%3Cuse href='%23s' x='9' y='4'/%3E%3Cuse href='%23s' x='12' y='1'/%3E%3Cuse href='%23s' x='16' y='6'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='d' width='19' height='17' patternUnits='userSpaceOnUse' patternTransform='rotate(26 1000 750) scale(39.05) translate(-974.39 -730.79)'%3E%3Cg fill='%23e0f1ef'%3E%3Cuse href='%23s' y='9'/%3E%3Cuse href='%23s' x='16' y='5'/%3E%3Cuse href='%23s' x='14' y='2'/%3E%3Cuse href='%23s' x='11' y='11'/%3E%3Cuse href='%23s' x='6' y='14'/%3E%3C/g%3E%3Cg fill='%23c5d4d2'%3E%3Cuse href='%23s' x='3' y='13'/%3E%3Cuse href='%23s' x='9' y='7'/%3E%3Cuse href='%23s' x='13' y='10'/%3E%3Cuse href='%23s' x='15' y='4'/%3E%3Cuse href='%23s' x='18' y='1'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='e' width='47' height='53' patternUnits='userSpaceOnUse' patternTransform='rotate(26 1000 750) scale(39.05) translate(-974.39 -730.79)'%3E%3Cg fill='%23e76f51'%3E%3Cuse href='%23s' x='2' y='5'/%3E%3Cuse href='%23s' x='16' y='38'/%3E%3Cuse href='%23s' x='46' y='42'/%3E%3Cuse href='%23s' x='29' y='20'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='f' width='59' height='71' patternUnits='userSpaceOnUse' patternTransform='rotate(26 1000 750) scale(39.05) translate(-974.39 -730.79)'%3E%3Cg fill='%23e76f51'%3E%3Cuse href='%23s' x='33' y='13'/%3E%3Cuse href='%23s' x='27' y='54'/%3E%3Cuse href='%23s' x='55' y='55'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='g' width='139' height='97' patternUnits='userSpaceOnUse' patternTransform='rotate(26 1000 750) scale(39.05) translate(-974.39 -730.79)'%3E%3Cg fill='%23e76f51'%3E%3Cuse href='%23s' x='11' y='8'/%3E%3Cuse href='%23s' x='51' y='13'/%3E%3Cuse href='%23s' x='17' y='73'/%3E%3Cuse href='%23s' x='99' y='57'/%3E%3C/g%3E%3C/pattern%3E%3C/defs%3E%3Crect fill='url(%23a)' width='100%25' height='100%25'/%3E%3Crect fill='url(%23b)' width='100%25' height='100%25'/%3E%3Crect fill='url(%23h)' width='100%25' height='100%25'/%3E%3Crect fill='url(%23c)' width='100%25' height='100%25'/%3E%3Crect fill='url(%23d)' width='100%25' height='100%25'/%3E%3Crect fill='url(%23e)' width='100%25' height='100%25'/%3E%3Crect fill='url(%23f)' width='100%25' height='100%25'/%3E%3Crect fill='url(%23g)' width='100%25' height='100%25'/%3E%3C/svg%3E");
+}
 :root{
   font-size: 16px;
   font-family: InterRegular;
   color: var(--eturo-contrast);
 }
 
-.text-contrast{
-  color: var(--eturo-contrast) !important;
+.text-contrast{color: var(--eturo-contrast) !important;}
+.border-contrast{border-color: var(--eturo-contrast) !important;}
+.extend-below{min-height: 100vh;}
+
+body{
+  background-color: #e0f1ef;
+  background-image: var(--eturo-bg1);
+  background-attachment: fixed;
+  background-size: cover;
+}
+body::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: var(--eturo-accent2);
+}body::-webkit-scrollbar-track {
+  background: var(--eturo-main-neg6);
 }
 
-.border-contrast{
-  border-color: var(--eturo-contrast) !important;
+.btn-eturo{
+  color: var(--eturo-contrast);
+  background-color: var(--eturo-main);
+  border-color: var(--eturo-main);
+}
+
+.btn-eturo {
+  color: var(--eturo-contrast);
+  background-color: var(--eturo-main);
+  border-color: var(--eturo-main);
+}
+
+.btn-eturo:hover {
+  color: var(--eturo-contrast);
+  background-color:var(--eturo-main);
+  border-color: var(--eturo-main);
+}
+
+.btn-eturo:focus, .btn-eturo.focus {
+  color: var(--eturo-contrast);
+  background-color: var(--eturo-main);
+  border-color: var(--eturo-main);
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+}
+
+.btn-eturo.disabled, .btn-eturo:disabled {
+  color: var(--eturo-contrast);
+  background-color: var(--eturo-main);
+  border-color: var(--eturo-main);
+}
+
+.btn-eturo:not(:disabled):not(.disabled):active, .btn-eturo:not(:disabled):not(.disabled).active,
+.show > .btn-eturo.dropdown-toggle {
+  color: var(--eturo-contrast);
+  background-color: var(--eturo-main);
+  border-color: var(--eturo-main);
+}
+
+.btn-eturo:not(:disabled):not(.disabled):active:focus, .btn-eturo:not(:disabled):not(.disabled).active:focus,
+.show > .btn-eturo.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+}
+
+.btn-outline-eturo {
+  color: var(--eturo-main);
+  border-color: var(--eturo-main);
+}
+
+.btn-outline-eturo:hover {
+  color: var(--eturo-contrast);
+  background-color: var(--eturo-main);
+  border-color: var(--eturo-main);
+}
+
+.btn-outline-eturo:focus, .btn-outline-eturo.focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+.btn-outline-eturo.disabled, .btn-outline-eturo:disabled {
+  color: var(--eturo-main);
+  background-color: transparent;
+}
+
+.btn-outline-eturo:not(:disabled):not(.disabled):active, .btn-outline-eturo:not(:disabled):not(.disabled).active,
+.show > .btn-outline-eturo.dropdown-toggle {
+  color: var(--eturo-contrast);
+  background-color: var(--eturo-main);
+  border-color: var(--eturo-main);
+}
+
+.btn-outline-eturo:not(:disabled):not(.disabled):active:focus, .btn-outline-eturo:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-eturo.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
 }

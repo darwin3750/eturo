@@ -14,6 +14,9 @@
             <b-nav-item>Likes </b-nav-item>
             <b-nav-item>Something else</b-nav-item>
           </b-nav>
+          <p class="">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, laudantium at modi rem quod ex provident quaerat incidunt quo ducimus praesentium atque perferendis fugiat veritatis ipsum suscipit quas saepe similique!
+          </p>
         </div>
       </section>
     </section>
