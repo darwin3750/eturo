@@ -13,6 +13,7 @@
     </b-navbar-toggle>
     <!-- collapsible content -->
     <b-collapse id="nav-collapse" is-nav>
+      <hr class="p-1 d-lg-none d-block">
       <b-navbar-nav class="ml-auto">
         <!-- The search bar -->
         <div class="navbar-form">
@@ -34,14 +35,14 @@
             Sign In
           </button>
         </b-nav-item>
-        <!-- Profile -->
-        <b-nav-item class="nav-link p-0" v-else v-click-outside="closeProfile" @click="viewProfileMenu = true">
-          <!-- Profile button in navbar -->
+        <!-- User--lg screen -->
+        <b-nav-item class="nav-link p-0 d-lg-block d-none" v-else v-click-outside="closeProfile" @click="viewProfileMenu = true">
+          <!-- User button in navbar -->
           <button class="text-left btn btn-lg text-contrast">
             <b-icon icon="person-circle"></b-icon>
             User
           </button>
-          <!-- Profile menu itself -->
+          <!-- User menu itself -->
           <transition name="fade">
             <div v-if="viewProfileMenu" class="shadow card p-3 position-absolute eturo-dropdown-menu" id="">
               <router-link class="nav-link" to="/profile">Profile</router-link>
@@ -49,6 +50,14 @@
             </div>
           </transition>
         </b-nav-item>
+        <!-- User--sm screen -->
+        <b-nav-text class="nav-link p-0 d-lg-none d-block">
+          <div class="text-left text-contrast label-lg">
+            <b-icon icon="person-circle"></b-icon> User<hr>
+            <router-link class="nav-link text-contrast" to="/profile">Profile</router-link>
+            <a class="nav-link text-contrast" @click.prevent @click="logout">Sign Out</a>
+          </div>
+        </b-nav-text>
         <!-- create acc button -->
         <b-nav-item class="nav-link p-0" v-if="!loggedIn" to="/signup">
           <button class="text-left btn btn-lg text-contrast">
@@ -56,8 +65,8 @@
             Create an Account
           </button>
         </b-nav-item>
-        <!-- Notifications -->
-        <b-nav-item class="nav-link p-0" v-else v-click-outside="closeNotifications" @click="viewNotificationsMenu = true">
+        <!-- Notifications--lg screen -->
+        <b-nav-item class="nav-link p-0 d-lg-block d-none" v-else v-click-outside="closeNotifications" @click="viewNotificationsMenu = true">
           <!-- Notifications button in navbar -->
           <button class="text-left btn btn-lg text-contrast">
             <b-icon icon="bell-fill"></b-icon>
@@ -66,9 +75,16 @@
           <!-- Notifications menu itself -->
           <transition name="fade">
             <div v-if="viewNotificationsMenu" class="shadow card p-3 position-absolute eturo-dropdown-menu" id="">
-              <!-- <Notification /> -->
+                                                <!-- <Notification /> -->
             </div>
           </transition>
+        </b-nav-item>
+        <!-- Notification--sm screen -->
+        <b-nav-item class="nav-link p-0 d-lg-none d-block">
+          <div class="text-left text-contrast label-lg">
+            <b-icon icon="bell-fill"></b-icon> Notifications<hr>
+                                                <!-- <Notification /> -->
+          </div>
         </b-nav-item>
       </b-navbar-nav>
     </b-collapse>
@@ -131,11 +147,19 @@ export default {
   .nav-link{
     white-space: nowrap !important;
   }
-  .navbar-search{
-    min-width: 400px;
+  @media (min-width: 992px) {
+    .navbar-search{
+      min-width: 400px;
+    }
   }
   .eturo-dropdown-menu{
     background-color: var(--eturo-contrast);
     color: var(--eturo-base)
+  }
+  .label-lg{
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: 0.3rem;
   }
 </style>
