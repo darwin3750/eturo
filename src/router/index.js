@@ -5,6 +5,7 @@ import { auth } from '../../firebase'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
 import Signup from '../pages/Signup'
+import Topic from '../pages/Topic'
 
 Vue.use(Router)
 
@@ -30,6 +31,14 @@ const routes = [
       forbidsAuth: true,
     }
   },
+  {
+    path: '/t/:slug',
+    name: 'Topic',
+    component: Topic,
+    meta: {
+      requiresAuth: true,
+    }
+  },
 ]
 
 const router = new Router({
@@ -38,10 +47,14 @@ const router = new Router({
 
 
 router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(routes => routes.meta.requiresAuth)
   const forbidsAuth = to.matched.some(routes => routes.meta.forbidsAuth)
 
+  if (requiresAuth && !auth.currentUser) {
+    next('/login')
+  }
   // prevent logged-in users from accessing auth pages
-  if (forbidsAuth && auth.currentUser) {
+  else if (forbidsAuth && auth.currentUser) {
     next('/')
   } else {
     next()
