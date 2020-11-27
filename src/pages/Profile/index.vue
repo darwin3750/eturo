@@ -1,19 +1,18 @@
 <template>
   <div>
-    <div class="container" v-if="this.user">
-      <section class="row mt-3">
+    <div class="container p-0" v-if="this.user">
+      <section class="row mt-md-3">
         <!-- User info -->
         <section class="col-lg-4">
           <UserInfo v-bind:user="this.user" />
         </section>
-        <!-- User posts -->
-        <section class="col-lg-8">
+        <!-- User posts/comments/etc -->
+        <section class="col-lg-8 mt-lg-0 mt-3">
           <div class="card shadow p-3">
             <b-nav tabs justified>
               <b-nav-item active>Posts</b-nav-item>
               <b-nav-item>Comments</b-nav-item>
               <b-nav-item>Likes </b-nav-item>
-              <b-nav-item>Something else</b-nav-item>
             </b-nav>
             <p class="">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
