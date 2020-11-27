@@ -36,7 +36,7 @@
           </button>
         </b-nav-item>
         <!-- User--lg screen -->
-        <b-nav-item class="nav-link p-0 d-lg-block d-none" v-else v-click-outside="closeProfile" @click="viewProfileMenu = true">
+        <b-nav-item class="nav-link p-0 d-lg-block d-none" v-if="loggedIn" v-click-outside="closeProfile" @click="viewProfileMenu = true">
           <!-- User button in navbar -->
           <button class="text-left btn btn-lg text-contrast">
             <b-icon icon="person-circle"></b-icon>
@@ -51,7 +51,7 @@
           </transition>
         </b-nav-item>
         <!-- User--sm screen -->
-        <b-nav-text class="nav-link p-0 d-lg-none d-block">
+        <b-nav-text class="nav-link p-0 d-lg-none d-block" v-if="loggedIn">
           <div class="text-left text-contrast label-lg">
             <b-icon icon="person-circle"></b-icon> User<hr>
             <router-link class="nav-link text-contrast" to="/profile">Profile</router-link>
@@ -66,7 +66,7 @@
           </button>
         </b-nav-item>
         <!-- Notifications--lg screen -->
-        <b-nav-item class="nav-link p-0 d-lg-block d-none" v-else v-click-outside="closeNotifications" @click="viewNotificationsMenu = true">
+        <b-nav-item class="nav-link p-0 d-lg-block d-none" v-if="loggedIn" v-click-outside="closeNotifications" @click="viewNotificationsMenu = true">
           <!-- Notifications button in navbar -->
           <button class="text-left btn btn-lg text-contrast">
             <b-icon icon="bell-fill"></b-icon>
@@ -80,7 +80,7 @@
           </transition>
         </b-nav-item>
         <!-- Notification--sm screen -->
-        <b-nav-item class="nav-link p-0 d-lg-none d-block">
+        <b-nav-item class="nav-link p-0 d-lg-none d-block" v-if="loggedIn">
           <div class="text-left text-contrast label-lg">
             <b-icon icon="bell-fill"></b-icon> Notifications<hr>
                                                 <!-- <Notification /> -->
