@@ -7,7 +7,7 @@ class UserModel {
     this.id = id
     this.displayName = displayName
     this.email = email
-    this.createdAt = moment(createdAt).calendar()
+    this.createdAt = moment(createdAt.toDate()).calendar()
   }
 
   toString() {

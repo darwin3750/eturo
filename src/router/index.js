@@ -6,6 +6,7 @@ import Home from '../pages/Home'
 import Profile from '../pages/Profile/'
 import Login from '../pages/Login'
 import Signup from '../pages/Signup'
+import NotFound from '../pages/404'
 
 import Topic from '../pages/Topic'
 import TopicNew from '../pages/Topic/New'
@@ -24,11 +25,6 @@ const routes = [
     component: Home,
   },
   {
-    path: '/profile',
-    name: 'Profile',
-    component: Profile,
-  },
-  {
     path: '/login',
     name: 'Login',
     component: Login,
@@ -45,6 +41,11 @@ const routes = [
     }
   },
   {
+    path: '/profile/:uid',
+    name: 'Profile',
+    component: Profile,
+  },
+  {
     path: '/t/new',
     name: 'TopicNew',
     component: TopicNew,
@@ -59,6 +60,11 @@ const routes = [
     meta: {
       requiresAuth: true,
     }
+  },
+  {
+    path: '*',
+    name: '404',
+    component: NotFound,
   },
 ]
 

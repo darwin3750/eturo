@@ -39,12 +39,14 @@
           <!-- Profile button in navbar -->
           <button class="text-left btn btn-lg text-contrast">
             <b-icon icon="person-circle"></b-icon>
-            User
+            {{ this.$store.getters.currentUser.displayName }}
           </button>
           <!-- Profile menu itself -->
           <transition name="fade">
             <div v-if="viewProfileMenu" class="shadow card p-3 position-absolute eturo-dropdown-menu" id="">
-              <router-link class="nav-link" to="/profile">Profile</router-link>
+              <router-link class="nav-link" :to="{ name: 'Profile', params: { uid: this.currentUser.uid } }">
+                Profile
+              </router-link>
               <a class="nav-link" @click.prevent @click="logout">Sign Out</a>
             </div>
           </transition>
@@ -82,7 +84,8 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters([
-      'loggedIn'
+      'loggedIn',
+      'currentUser',
     ])
   },
   data() {
