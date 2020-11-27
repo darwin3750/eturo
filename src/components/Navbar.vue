@@ -39,7 +39,7 @@
           <!-- Profile button in navbar -->
           <button class="text-left btn btn-lg text-contrast">
             <b-icon icon="person-circle"></b-icon>
-            {{ this.$store.getters.currentUser.displayName }}
+            {{ this.currentUser.displayName }}
           </button>
           <!-- Profile menu itself -->
           <transition name="fade">
