@@ -1,6 +1,6 @@
 <template>
   <div class="card shadow p-3">
-    <b-icon v-if="owner" class="mb-2" icon="pencil-square" variant="" @click="toggleEdit"></b-icon>
+    <b-icon v-if="owner" class="mb-2 edit-buttton position-absolute" icon="pencil-square" variant="" @click="toggleEdit"></b-icon>
     <h1 v-if="!editing"> {{ this.displayName }} </h1>
     <input v-else type="text" v-model="displayName" />
     <h3> Joined {{ this.user.createdAt }} </h3>
@@ -61,5 +61,9 @@ export default {
 </script>
 
 <style scoped>
-
+  .edit-buttton{
+    top: 0; 
+    right: 0;
+    padding: 0.75rem 1.55rem;
+  }
 </style>
