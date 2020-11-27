@@ -8,7 +8,7 @@ import Login from '../pages/Login'
 import Signup from '../pages/Signup'
 import NotFound from '../pages/404'
 
-import Topic from '../pages/Topic'
+import Topic from '../pages/Topic/'
 import TopicNew from '../pages/Topic/New'
 
 import vClickOutside from 'v-click-outside'
