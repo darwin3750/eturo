@@ -3,12 +3,7 @@
     <section class="row mt-3">
       <!-- User info -->
       <section class="col-lg-4">
-        <div class="card shadow p-3"><h1>Username</h1>
-          <h3>stuff</h3>
-          <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi odio ab sunt, nesciunt tenetur est eveniet neque ratione quia, magni sequi architecto. Eveniet animi maxime distinctio quam, nam numquam veritatis!
-          </p>
-        </div>
+        <UserInfo />
       </section>
       <!-- User posts -->
       <section class="col-lg-8">
@@ -26,7 +21,11 @@
 </template>
 
 <script>
+import UserInfo from '../../components/UserInfo'
 export default {
+  components: {
+    UserInfo,
+  }
 }
 </script>
 
