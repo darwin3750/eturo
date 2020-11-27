@@ -5,7 +5,16 @@ import App from './App'
 import router from './router'
 import store from './store/index'
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+import 'bootstrap-vue/dist/bootstrap-vue-icons.min.css';
+import './assets/styles/styles.css';
+import {BootstrapVue, BootstrapVueIcons} from 'bootstrap-vue';
+
 Vue.config.productionTip = false
+
+Vue.use(BootstrapVue);
+Vue.use(BootstrapVueIcons);
 
 /* eslint-disable no-new */
 new Vue({
