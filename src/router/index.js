@@ -3,10 +3,16 @@ import Router from 'vue-router'
 import { auth } from '../../firebase'
 
 import Home from '../pages/Home'
+import Profile from '../pages/Profile/'
 import Login from '../pages/Login'
 import Signup from '../pages/Signup'
 import Topic from '../pages/Topic'
 
+import vClickOutside from 'v-click-outside'
+import inViewportDirective from 'vue-in-viewport-directive'
+
+Vue.directive('in-viewport', inViewportDirective)
+Vue.use(vClickOutside)
 Vue.use(Router)
 
 const routes = [
@@ -14,6 +20,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
   },
   {
     path: '/login',
