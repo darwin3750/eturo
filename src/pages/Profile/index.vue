@@ -1,9 +1,9 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="this.user">
     <section class="row mt-3">
       <!-- User info -->
       <section class="col-lg-4">
-        <UserInfo />
+        <UserInfo v-bind:user="this.user" />
       </section>
       <!-- User posts -->
       <section class="col-lg-8">
@@ -21,11 +21,32 @@
       </section>
     </section>
   </div>
+  <div v-else>
+    <h1 class="text-center mt-4"> {{ msg }} </h1>
+  </div>
 </template>
 
 <script>
+import { userCollection } from '../../../firebase'
+import { userConverter } from '../../models/user'
 import UserInfo from '../../components/UserInfo'
 export default {
+  beforeMount() {
+    const userId = this.$route.params.uid
+    userCollection.doc(userId).withConverter(userConverter).get().then(snapshot => {
+      if(!snapshot.exists) {
+        this.msg = "Looks like that user doesn't exist!"
+        return
+      }
+      this.user = snapshot.data()
+    })
+  },
+  data() {
+    return {
+      user: null,
+      msg: "Loading user data..."
+    }
+  },
   components: {
     UserInfo,
   }

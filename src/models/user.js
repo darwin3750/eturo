@@ -3,11 +3,12 @@ import 'firebase/firestore'
 import moment from 'moment'
 
 class UserModel {
-  constructor(id, displayName, email, createdAt) {
+  constructor(id, displayName, email, createdAt, bio) {
     this.id = id
     this.displayName = displayName
     this.email = email
-    this.createdAt = moment(createdAt).calendar()
+    this.createdAt = moment(createdAt.toDate()).calendar()
+    this.bio = bio || ""
   }
 
   toString() {
@@ -25,7 +26,7 @@ const userConverter = {
   },
   fromFirestore: function(snapshot, options) {
     const data = snapshot.data(options)
-    return new UserModel(snapshot.id, data.displayName, data.email, data.createdAt)
+    return new UserModel(snapshot.id, data.displayName, data.email, data.createdAt, data.bio)
   }
 }
 
