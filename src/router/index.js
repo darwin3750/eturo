@@ -6,7 +6,7 @@ import Home from '../pages/Home'
 import Profile from '../pages/Profile/'
 import Login from '../pages/Login'
 import Signup from '../pages/Signup'
-import NotFound from '../pages/404'
+// import NotFound from '../pages/404'
 
 import Topic from '../pages/Topic/'
 import TopicNew from '../pages/Topic/New'
@@ -61,11 +61,11 @@ const routes = [
       requiresAuth: true,
     }
   },
-  {
-    path: '*',
-    name: '404',
-    component: NotFound,
-  },
+  // {
+  //   path: '*',
+  //   name: '404',
+  //   component: NotFound,
+  // },
 ]
 
 const router = new Router({
