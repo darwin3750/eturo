@@ -4,7 +4,6 @@
       <div class="card shadow m-sm-1 p-4">
         <b-icon v-if="owner" class="mb-2 edit-button position-absolute" icon="pencil-square" variant="" @click="toggleEdit"></b-icon>
         <div v-if="!editing" >
-<<<<<<< HEAD
           <!-- display title -->
           <h2 class="mb-0"> {{ title }} </h2>
           <!-- HR -->
@@ -21,16 +20,6 @@
           </section>
           <!-- display main body -->
           <p class="post-body p-4 mt-4"> {{ body }} </p>
-=======
-          <h1 class="mb-0"> {{ title }} </h1>
-          <small class="text-muted"> {{ displayName }} </small>
-          <small class="text-muted"> {{ post.createdAt }} </small>
-          <p> {{ body }} </p>
-          <hr />
-          <Comment v-for="comment in comments" :key="comment.id" :comment="comment" @destroy-comment="destroyComment" />
-          <hr />
-          <NewComment @new-comment="addComment" ref="newCommentForm"/>
->>>>>>> e941b4753c9d5944e9039bdb7bc666ce06f7f731
         </div>
         <div v-if="owner && editing" >
           <NewPost
@@ -42,7 +31,9 @@
           <hr />
         </div>
         <h3>Comments</h3>
-
+        <Comment v-for="comment in comments" :key="comment.id" :comment="comment" @destroy-comment="destroyComment" />
+          <hr />
+        <NewComment @new-comment="addComment" ref="newCommentForm"/>
         <hr>
         <!-- Display random image every refresh -->
         <img v-if="randomPic==0" src="../assets/undraw_content.svg" height="auto" width="200px" class="ml-auto mr-auto mt-3">
