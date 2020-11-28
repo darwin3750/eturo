@@ -81,6 +81,11 @@
   color: var(--eturo-contrast);
 }
 
+::selection{
+  background: var(--eturo-main);
+  color: var(--eturo-contrast);
+}
+
 .text-contrast{color: var(--eturo-contrast) !important;}
 .border-contrast{border-color: var(--eturo-contrast) !important;}
 .extend-below{min-height: 100vh;}
