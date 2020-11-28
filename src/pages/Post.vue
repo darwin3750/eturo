@@ -4,6 +4,7 @@
       <div class="card shadow m-sm-1 p-4">
         <b-icon v-if="owner" class="mb-2 edit-button position-absolute" icon="pencil-square" variant="" @click="toggleEdit"></b-icon>
         <div v-if="!editing" >
+<<<<<<< HEAD
           <!-- display title -->
           <h2 class="mb-0"> {{ title }} </h2>
           <!-- HR -->
@@ -20,6 +21,16 @@
           </section>
           <!-- display main body -->
           <p class="post-body p-4 mt-4"> {{ body }} </p>
+=======
+          <h1 class="mb-0"> {{ title }} </h1>
+          <small class="text-muted"> {{ displayName }} </small>
+          <small class="text-muted"> {{ post.createdAt }} </small>
+          <p> {{ body }} </p>
+          <hr />
+          <Comment v-for="comment in comments" :key="comment.id" :comment="comment" @destroy-comment="destroyComment" />
+          <hr />
+          <NewComment @new-comment="addComment" ref="newCommentForm"/>
+>>>>>>> e941b4753c9d5944e9039bdb7bc666ce06f7f731
         </div>
         <div v-if="owner && editing" >
           <NewPost
@@ -27,7 +38,7 @@
             ref="editPostForm"
             @submit-post="updatePost"
           />
-          <button @click="$emit('destroy-post', post.id)" class="btn btn-sm btn-danger"> delete </button>
+          <button @click="destroyPost" class="btn btn-sm btn-danger"> delete </button>
           <hr />
         </div>
         <h3>Comments</h3>
@@ -52,10 +63,12 @@
 <script>
 import { userCollection, topicCollection } from "../../firebase";
 import { mapGetters } from 'vuex'
-import { userConverter } from "../models/user";
 import { topicConverter } from '../models/topic';
 import { postConverter } from '../models/post';
+
 import NewPost from '../components/Post/Form'
+import Comment from '../components/Comment/'
+import NewComment from '../components/Comment/Form'
 
 import Error from "../components/404";
 import Loading from "../components/Loading";
@@ -63,38 +76,51 @@ import Loading from "../components/Loading";
 export default {
   beforeMount() {
     const { post_uid, topic_uid } = this.$route.params;
-    this.topic = topic_uid;
-    
-    topicCollection.doc(this.topic).collection('posts')
-    .doc(post_uid).withConverter(postConverter).get().then((snapshot) => {
-      if (!snapshot.exists) {
-        this.failedLoad = true;
-        return;
-      }
-      this.post = snapshot.data();
+    this.topicId = topic_uid;
 
-      this.title = this.post.title
-      this.body = this.post.body
-      userCollection.doc(this.post.createdBy.id).get().then(snapshot => {
-        const { displayName } = snapshot.data()
-        this.owner = this.currentUser.uid === snapshot.id
-        this.displayName = displayName
-      })
-    });
+    Promise.all([
+      topicCollection.doc(this.topicId).withConverter(topicConverter).get().then(snapshot => {
+        this.topic = snapshot.data()
+      }), // load topic
+      topicCollection.doc(this.topicId).collection('posts')
+      .doc(post_uid).withConverter(postConverter).get().then((snapshot) => {
+        if (!snapshot.exists) {
+          this.failedLoad = true;
+          return;
+        }
+
+        // load post and comments
+        this.post = snapshot.data();
+        // actually get comments
+        this.post.getAllComments().then(comments => this.comments = comments)
+
+        this.title = this.post.title
+        this.body = this.post.body
+
+        // get the owner's display name
+        userCollection.doc(this.post.createdBy.id).get().then(snapshot => {
+          const { displayName } = snapshot.data()
+          this.owner = this.currentUser.uid === snapshot.id
+          this.displayName = displayName
+        })
+      }), // second promise
+    ])
+    
   },
   computed: {
-    ...mapGetters(['currentUser'])
+    ...mapGetters(['currentUser', 'currentUserReference'])
   },
   data() {
     return {
+      failedLoad: false,
+      post: null,
+      comments: [],
       owner: false,
-      editing: false,
       displayName: "",
+      editing: false,
       title: "",
       body: "",
-      post: null,
-      failedLoad: false,
-      topic: ""
+      topic: "",
     }
   },
   created(){
@@ -103,7 +129,9 @@ export default {
   components: {
     Error,
     Loading,
-    NewPost
+    NewPost,
+    Comment,
+    NewComment,
   },
   methods: {
     toggleEdit() {
@@ -113,13 +141,33 @@ export default {
       const { title, body } = postData
       this.title = title
       this.body = body
-      topicCollection.doc(this.topic).collection('posts').doc(this.post.id).update({
+      topicCollection.doc(this.topicId).collection('posts').doc(this.post.id).update({
         title, body
       }).then(() => {
         this.toggleEdit()
       }).catch(() => {
         alert("Failed to update your post! Must be your internet connection...")
       })
+    },
+    async destroyPost() {
+      const res = await this.topic.destroyPost(this.post.id)
+      this.$router.push({ name: "Topic", params: { slug: this.topic.id } })
+    },
+    async addComment(comment) {
+      comment.createdBy = this.currentUserReference
+      const newComment = await this.post.addComment(comment)
+      if(!newComment.message) {
+        this.comments.push(newComment)
+        this.$refs.newCommentForm.reset()
+      }
+    },
+    async destroyComment(commentId) {
+      const res = await this.post.destroyComment(commentId)
+      if(res) {
+        this.comments = this.comments.filter(comment => comment.id != commentId)
+      } else {
+        alert("Failed to delete the comment! Must be your internet connection...")
+      }
     },
   },
 }

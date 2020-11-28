@@ -8,7 +8,7 @@ import Profile from '../pages/Profile'
 import Login from '../pages/Login'
 import Post from '../pages/Post'
 import Signup from '../pages/Signup'
-// import NotFound from '../pages/404'
+import NotFound from '../components/404'
 
 import Topic from '../pages/Topic/'
 import TopicNew from '../pages/Topic/New'
@@ -58,14 +58,6 @@ const routes = [
     component: BadgesInfo,
   },
   {
-    path: '/t/new',
-    name: 'TopicNew',
-    component: TopicNew,
-    meta: {
-      requiresAuth: true,
-    }
-  },
-  {
     path: '/t/:slug',
     name: 'Topic',
     component: Topic,
@@ -73,11 +65,19 @@ const routes = [
       requiresAuth: true,
     }
   },
-  // {
-  //   path: '*',
-  //   name: '404',
-  //   component: NotFound,
-  // },
+  {
+    path: '/topic/new',
+    name: 'TopicNew',
+    component: TopicNew,
+    meta: {
+      requiresAuth: true,
+    }
+  },
+  {
+    path: '*',
+    name: '404',
+    component: NotFound,
+  },
 ]
 
 const router = new Router({
