@@ -10,24 +10,32 @@ class TopicModel {
     this.description = description
     this.createdAt = moment(createdAt).calendar()
     this.createdBy = 'me'
+    this.reference = topicCollection.doc(this.id)
   }
-
   // checks if a user is a moderator of this topic
-  isModerator(userId) {
+  isModerator(userRef) {
     let mod = false
-    topicCollection.doc(this.id).collection('moderators').doc(userId).get()
-      .then(snapshot => {
-        mod = snapshot
+    this.reference.collection('moderators')
+      .where('user', '==', userRef).get().then(x => {
+        mod = !x.empty
       })
     return mod
   }
 
 }
 
+const topicSlugGenerator = (string) => {
+  const wordArr = string.split(" ").map(word => word.toLowerCase().trim())
+  const filtered = wordArr.map(word => {
+    return word.replace(/[^a-zA-Z0-9]/g, "")
+  })
+  return filtered.join("-")
+}
+
 const topicConverter = {
   toFirestore: function(topic) {
     return {
-      title: topic.title,
+      title: topicSlugGenerator(topic.title),
       description: topic.description,
       createdAt: firebase.firestore.Timestamp.now(),
       createdBy: topic.createdBy,
@@ -42,4 +50,5 @@ const topicConverter = {
 export {
   TopicModel,
   topicConverter,
+  topicSlugGenerator,
 }
