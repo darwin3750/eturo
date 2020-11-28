@@ -50,7 +50,11 @@ export default {
           alert("Topic does not exist")
         } else {
           this.currentTopic = topic.data()
-          this.isModerator = this.currentTopic.isModerator(this.currentUserReference)
+
+          // is the user a moderator
+          this.currentTopic.isModerator(this.currentUserReference).then(bool => {
+            this.isModerator = bool
+          })
           // get all posts and set
           this.currentTopic.allPosts().then(posts => {
             this.posts = posts

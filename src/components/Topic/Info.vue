@@ -18,7 +18,6 @@ export default {
   props: ['topic', 'mod'],
   data() {
     return {
-      owner: false,
       editing: false,
     }
   },
