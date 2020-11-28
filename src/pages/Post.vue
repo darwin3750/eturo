@@ -33,6 +33,7 @@ import { mapGetters } from 'vuex'
 import { userConverter } from "../models/user";
 import { topicConverter } from '../models/topic';
 import { postConverter } from '../models/post';
+import NewPost from '../components/Post/Form'
 
 import Error from "../components/404";
 import Loading from "../components/Loading";
@@ -41,7 +42,8 @@ export default {
   beforeMount() {
     const postId = this.$route.params.post_uid;
     const topicId = this.$route.params.topic_uid;
-
+    this.topic = topicId;
+    
     topicCollection.doc(topicId).collection('posts')
     .doc(postId).withConverter(postConverter).get().then((snapshot) => {
       if (!snapshot.exists) {
@@ -53,7 +55,7 @@ export default {
       this.title = this.post.title
       this.body = this.post.body
       userCollection.doc(this.post.createdBy.id).get().then(snapshot => {
-        const { displayName} = snapshot.data()
+        const { displayName } = snapshot.data()
         this.owner = this.currentUser.uid === snapshot.id
         this.displayName = displayName
       })
@@ -71,11 +73,30 @@ export default {
       body: "",
       post: null,
       failedLoad: false,
+      topic: ""
     }
   },
   components: {
     Error,
     Loading,
+    NewPost
+  },
+  methods: {
+    toggleEdit() {
+      if (this.owner) this.editing = !this.editing
+    },
+    updatePost(postData) {
+      const { title, body } = postData
+      this.title = title
+      this.body = body
+      topicCollection.doc(this.topic).collection('posts').doc(this.post.id).update({
+        title, body
+      }).then(() => {
+        this.toggleEdit()
+      }).catch(() => {
+        alert("Failed to update your post! Must be your internet connection...")
+      })
+    },
   },
 }
 </script>
