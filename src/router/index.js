@@ -6,6 +6,7 @@ import Home from '../pages/Home'
 import BadgesInfo from '../pages/BadgesInfo'
 import Profile from '../pages/Profile'
 import Login from '../pages/Login'
+import Post from '../pages/Post'
 import Signup from '../pages/Signup'
 // import NotFound from '../pages/404'
 
@@ -45,6 +46,11 @@ const routes = [
     path: '/profile/:uid',
     name: 'Profile',
     component: Profile,
+  },
+  {
+    path: '/post/:post_uid',
+    name: 'Post',
+    component: Post,
   },
   {
     path: '/badgesinfo',

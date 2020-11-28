@@ -15,14 +15,8 @@
     <b-collapse id="nav-collapse" is-nav>
       <hr class="p-1 d-lg-none d-block">
       <b-navbar-nav class="ml-auto">
-
-
-
         <!-- The search bar -->
         <Search />
-
-
-        
         <!-- sign in button -->
         <b-nav-item class="nav-link p-0" v-if="!loggedIn" to="/login">
           <button class="text-left btn btn-lg text-contrast">

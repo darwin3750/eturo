@@ -1,22 +1,12 @@
 <template>
-  <div>
-    <b-icon v-if="owner" class="mb-2 edit-buttton position-absolute" icon="pencil-square" variant="" @click="toggleEdit"></b-icon>
-    <div v-if="!editing">
+  <router-link :to="{ name: 'Post', params: { post_uid: post.id, topic_uid: topic } }" class="post-slug card shadow m-1 p-2">
+    <div >
       <h1 class="mb-0"> {{ title }} </h1>
       <small class="text-muted"> {{ displayName }} </small>
       <small class="text-muted"> {{ post.createdAt }} </small>
-      <p> {{ body }} </p>
+      <p class="text-truncate"> {{ body }} </p>
     </div>
-    <div v-if="owner && editing" >
-      <NewPost
-        v-bind:post="{ title, body }"
-        ref="editPostForm"
-        @submit-post="updatePost"
-      />
-      <button @click="$emit('destroy-post', post.id)" class="btn btn-sm btn-danger"> delete </button>
-      <hr />
-    </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -38,7 +28,7 @@ export default {
     this.body = this.post.body
 
     userCollection.doc(this.post.createdBy.id).get().then(snapshot => {
-      const { displayName} = snapshot.data()
+      const { displayName } = snapshot.data()
       this.owner = this.currentUser.uid === snapshot.id
       this.displayName = displayName
     })
@@ -72,6 +62,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+  .post-slug{
+    max-height: 10rem !important;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+  }
 </style>
