@@ -12,14 +12,11 @@ class TopicModel {
     this.createdBy = createdBy
     this.reference = topicCollection.doc(this.id)
   }
+
   // checks if a user is a moderator of this topic
-  isModerator(userRef) {
-    let mod = false
-    this.reference.collection('moderators')
-      .where('user', '==', userRef).get().then(x => {
-        mod = !x.empty
-      })
-    return mod
+  async isModerator(userRef) {
+    return await this.reference.collection('moderators')
+      .where('user', '==', userRef).get().then(x => !x.empty)
   }
 
 }
