@@ -17,6 +17,7 @@
             <div>
               <span> {{ appledUsers.length }} apple(s) </span>
               <button v-if="!appled" @click="addApple" class="btn btn-sm btn-danger"> apple </button>
+              <button v-else @click="removeApple" class="btn btn-sm btn-danger"> unapple </button>
             </div>
           </section>
           <!-- display main body -->
@@ -173,10 +174,19 @@ export default {
     async addApple() {
       const newApple = await this.post.addApple({ createdBy: this.currentUserReference })
       if (!newApple.message) {
-        this.appled = true
         this.appledUsers.push(newApple)
+        this.appled = true
       } else {
         alert("Had trouble giving an apple! Must be your internet connection...")
+      }
+    },
+    async removeApple() {
+      const apple = this.appledUsers.find(x => x.createdBy.id == this.currentUserReference.id)
+      if(await this.post.removeApple(apple.id)) {
+        this.appledUsers = this.appledUsers.filter(x => x.id != apple.id)
+        this.appled = false
+      } else {
+        alert("Had trouble unappling! Must be your internet connection...")
       }
     }
   },

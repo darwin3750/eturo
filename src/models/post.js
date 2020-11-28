@@ -52,6 +52,16 @@ class PostModel {
     }
   }
 
+  async removeApple(appleId) {
+    try {
+      await topicCollection.doc(this.topic.id).collection('posts').doc(this.id)
+        .collection('apples').doc(appleId).delete()
+    } catch(error) {
+      return false
+    }
+    return true
+  }
+
   async getAllApples() {
     const apples = await topicCollection.doc(this.topic.id).collection('posts')
       .doc(this.id).collection('apples').withConverter(appleConverter).get()
