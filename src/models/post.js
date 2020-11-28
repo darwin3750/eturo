@@ -2,6 +2,9 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import moment from 'moment'
 
+import { topicCollection } from '../../firebase'
+import { commentConverter } from './comment'
+
 class PostModel {
   constructor(id, title, body, createdAt, createdBy) {
     this.id = id
@@ -11,8 +14,22 @@ class PostModel {
     this.createdBy = createdBy
   }
 
-  setTopic(topicRef) {
-    this.topic = topicRef
+  setTopic(topicId) {
+    this.topic = topicId
+  }
+
+  async getAllComments() {
+    const querySnapshot = await topicCollection.doc(this.topic).collection('posts')
+      .doc(this.id).collection('comments').withConverter(commentConverter).get()
+    return querySnapshot.docs.map(doc => doc.data())
+  }
+
+  async addComment(comment) {
+    return await topicCollection.doc(this.topic).collection('posts')
+      .doc(this.id).collection('comments').add(commentConverter.toFirestore(comment))
+      .then(commentRef => commentRef.withConverter(commentConverter).get()
+      .then(snapshot => snapshot.data()))
+      .catch(error => error)
   }
 }
 

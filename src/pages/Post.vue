@@ -8,6 +8,10 @@
           <small class="text-muted"> {{ displayName }} </small>
           <small class="text-muted"> {{ post.createdAt }} </small>
           <p> {{ body }} </p>
+          <hr />
+          <Comment v-for="comment in comments" :key="comment.id" :comment="comment" />
+          <hr />
+          <NewComment @new-comment="addComment" ref="newCommentForm"/>
         </div>
         <div v-if="owner && editing" >
           <NewPost
@@ -32,7 +36,10 @@ import { userCollection, topicCollection } from "../../firebase";
 import { mapGetters } from 'vuex'
 import { topicConverter } from '../models/topic';
 import { postConverter } from '../models/post';
+
 import NewPost from '../components/Post/Form'
+import Comment from '../components/Comment/'
+import NewComment from '../components/Comment/Form'
 
 import Error from "../components/404";
 import Loading from "../components/Loading";
@@ -52,38 +59,49 @@ export default {
           this.failedLoad = true;
           return;
         }
+
+        // load post and comments
         this.post = snapshot.data();
+        // set post topic
+        this.post.setTopic(this.topicId)
+        // actually get comments
+        this.post.getAllComments().then(comments => this.comments = comments)
 
         this.title = this.post.title
         this.body = this.post.body
+
+        // get the owner's display name
         userCollection.doc(this.post.createdBy.id).get().then(snapshot => {
           const { displayName } = snapshot.data()
           this.owner = this.currentUser.uid === snapshot.id
           this.displayName = displayName
         })
-      }), // load actual post
+      }), // second promise
     ])
     
   },
   computed: {
-    ...mapGetters(['currentUser'])
+    ...mapGetters(['currentUser', 'currentUserReference'])
   },
   data() {
     return {
+      failedLoad: false,
+      post: null,
+      comments: [],
       owner: false,
-      editing: false,
       displayName: "",
+      editing: false,
       title: "",
       body: "",
-      post: null,
-      failedLoad: false,
       topic: "",
     }
   },
   components: {
     Error,
     Loading,
-    NewPost
+    NewPost,
+    Comment,
+    NewComment,
   },
   methods: {
     toggleEdit() {
@@ -104,6 +122,14 @@ export default {
     async destroyPost() {
       const res = await this.topic.destroyPost(this.post.id)
       this.$router.push({ name: "Topic", params: { slug: this.topic.id } })
+    },
+    async addComment(comment) {
+      comment.createdBy = this.currentUserReference
+      const newComment = await this.post.addComment(comment)
+      if(!newComment.message) {
+        this.comments.push(newComment)
+        this.$refs.newCommentForm.reset()
+      }
     },
   },
 }
