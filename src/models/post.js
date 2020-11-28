@@ -4,6 +4,7 @@ import moment from 'moment'
 
 import { topicCollection } from '../../firebase'
 import { commentConverter } from './comment'
+import { appleConverter } from './apple'
 
 class PostModel {
   constructor(id, topic, title, body, createdAt, createdBy) {
@@ -37,6 +38,24 @@ class PostModel {
       return false
     }
     return true
+  }
+
+  async addApple(apple) {
+    try {
+      const x = await topicCollection.doc(this.topic.id).collection('posts').doc(this.id)
+        .collection('apples').add(appleConverter.toFirestore(apple))
+      const get = await x.withConverter(appleConverter).get()
+      const data = get.data()
+      return data
+    } catch(error) {
+      return false
+    }
+  }
+
+  async getAllApples() {
+    const apples = await topicCollection.doc(this.topic.id).collection('posts')
+      .doc(this.id).collection('apples').withConverter(appleConverter).get()
+    return apples.docs.map(apple => apple.data())
   }
 }
 

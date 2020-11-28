@@ -4,7 +4,7 @@
       <section class="row mt-md-3">
         <!-- User info -->
         <section class="col-lg-4">
-          <UserInfo :user="this.user" :stats="{ posts: posts.length, comments: comments.length}" />
+          <UserInfo :user="this.user" :stats="{ posts: posts.length, comments: comments.length, apples: applesGiven}" />
         </section>
         <!-- User posts/comments/etc -->
         <section class="col-lg-8 mt-lg-0 mt-3 pb-3 pl-3 pr-3">
@@ -12,7 +12,7 @@
             <b-nav tabs justified>
               <b-nav-item link-classes="user-nav-active" @click="switchTo">Posts</b-nav-item>
               <b-nav-item link-classes="user-nav" @click="switchTo">Comments</b-nav-item>
-              <b-nav-item link-classes="user-nav" @click="switchTo">Likes </b-nav-item>
+              <b-nav-item link-classes="user-nav" @click="switchTo">Apples</b-nav-item>
             </b-nav>
             <div class="card p-3 maincard">
               <transition name="fade">
@@ -21,6 +21,9 @@
                 </div>
                 <div v-if="currentTab ==='Comments'">
                   <Comment v-for="comment in comments" :key="comment.id" :comment="comment" />
+                </div>
+                <div v-if="currentTab ==='Apples'">
+                  <h1 class="text-center mt-2"> Received over {{ applesReceived }} apples </h1>
                 </div>
               </transition>
               <img src="../assets/undraw_done.svg" height="auto" width="200px" class="ml-auto mr-auto mt-3">
@@ -61,6 +64,8 @@ export default {
       currentTab: "Posts",
       posts: [],
       comments: [],
+      applesGiven: 0,
+      applesReceived: 0,
     };
   },
   components: {
@@ -89,7 +94,18 @@ export default {
         firebase.firestore().collectionGroup('posts')
           .where('createdBy', '==', userCollection.doc(userId)).withConverter(postConverter).get()
           .then(querySnapshot => {
-            this.posts = querySnapshot.docs.map(snapshot => snapshot.data())
+            this.posts = querySnapshot.docs.map(snapshot => {
+              // just get the apples in between, yeah?
+              const post = snapshot.data()
+              post.getAllApples().then(x => this.applesGiven += x.length)
+              return post
+            })
+          })
+        // all the apples the user gave
+        firebase.firestore().collectionGroup('apples')
+          .where('createdBy', '==', userCollection.doc(userId)).withConverter(postConverter).get()
+          .then(querySnapshot => {
+            this.applesReceived = querySnapshot.docs.length
           })
         });
         // yes, the indent is like this
