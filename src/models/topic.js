@@ -8,7 +8,7 @@ class TopicModel {
     this.id = id
     this.title = title
     this.description = description
-    this.createdAt = moment(createdAt).calendar()
+    this.createdAt = moment(createdAt.toDate()).calendar()
     this.createdBy = createdBy
     this.reference = topicCollection.doc(this.id)
   }
@@ -35,7 +35,7 @@ const topicSlugGenerator = (string) => {
 const topicConverter = {
   toFirestore: function(topic) {
     return {
-      title: topicSlugGenerator(topic.title),
+      title: topic.title,
       description: topic.description,
       createdAt: firebase.firestore.Timestamp.now(),
       createdBy: topic.createdBy,

@@ -39,11 +39,10 @@ export default {
       const available = await queryPrefix.get().then(snapshot => !snapshot.exists)
 
       if (available) {
-        alert('available')
         Promise.all([
           // create the topic
           queryPrefix.set(topicConverter.toFirestore({
-            title: slug,
+            title: this.title,
             description: this.description,
             createdBy: this.currentUserReference,
           })),
