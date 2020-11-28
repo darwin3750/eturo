@@ -7,18 +7,18 @@ class PostModel {
     this.id = id
     this.title = title
     this.body = body 
-    this.createdAt = moment(createdAt).calendar()
+    this.createdAt = moment(createdAt.toDate()).calendar()
     this.createdBy = createdBy
   }
 }
 
 const postConverter = {
-  toFirestore: function(topic) {
+  toFirestore: function(post) {
     return {
-      title: topic.title,
-      body: topic. body,
+      title: post.title,
+      body: post. body,
       createdAt: firebase.firestore.Timestamp.now(),
-      createdBy: topic.createdBy,
+      createdBy: post.createdBy,
     }
   },
   fromFirestore: function(snapshot, options) {

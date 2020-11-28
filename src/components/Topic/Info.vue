@@ -6,7 +6,7 @@
     <div v-if="!editing">
       <p> {{ topic.description }} </p>
     </div>
-    <div v-else-if="editing" class="form-group">
+    <div v-else-if="mod && editing" class="form-group">
       <textarea class="form-control" v-model="topic.description"></textarea>
       <input type="submit" value="update" class="mt-2 btn btn-sm btn-primary" />
     </div>

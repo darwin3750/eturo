@@ -1,7 +1,9 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import { topicCollection } from '../../firebase'
 import moment from 'moment'
+
+import { topicCollection } from '../../firebase'
+import { postConverter } from './post'
 
 class TopicModel {
   constructor(id, title, description, createdAt, createdBy) {
@@ -17,6 +19,19 @@ class TopicModel {
   async isModerator(userRef) {
     return await this.reference.collection('moderators')
       .where('user', '==', userRef).get().then(x => !x.empty)
+  }
+
+  async addPost(post) {
+    return await this.reference.collection('posts').add(postConverter.toFirestore(post))
+      .then(postRef => postRef.withConverter(postConverter).get().then(snapshot => snapshot.data()))
+      .catch(error => error)
+  }
+
+  async allPosts() {
+    this.posts = []
+    const querySnapshot = await this.reference.collection('posts').withConverter(postConverter).get()
+    querySnapshot.forEach(snapshot => this.posts.push(snapshot.data()))
+    return this.posts
   }
 
 }
