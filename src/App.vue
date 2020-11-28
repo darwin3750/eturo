@@ -12,9 +12,14 @@ export default {
   components: {
     Navbar,
   },
+  data() {
+    return {
+      reusedRoutes: ['Profile', 'Topic'],
+    }
+  },
   computed: {
     key() {
-      if (this.$route.name === "Profile") {
+      if (this.reusedRoutes.includes(this.$route.name)) {
         return this.$route.fullPath
       } else {
         return this.$route.name

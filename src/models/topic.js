@@ -1,27 +1,47 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import { topicCollection } from '../../firebase'
 import moment from 'moment'
+
+import { topicCollection } from '../../firebase'
+import { postConverter } from './post'
 
 class TopicModel {
   constructor(id, title, description, createdAt, createdBy) {
     this.id = id
     this.title = title
     this.description = description
-    this.createdAt = moment(createdAt).calendar()
-    this.createdBy = 'me'
+    this.createdAt = moment(createdAt.toDate()).calendar()
+    this.createdBy = createdBy
+    this.reference = topicCollection.doc(this.id)
   }
 
   // checks if a user is a moderator of this topic
-  isModerator(userId) {
-    let mod = false
-    topicCollection.doc(this.id).collection('moderators').doc(userId).get()
-      .then(snapshot => {
-        mod = snapshot
-      })
-    return mod
+  async isModerator(userRef) {
+    return await this.reference.collection('moderators')
+      .where('user', '==', userRef).get().then(x => !x.empty)
   }
 
+  async addPost(post) {
+    return await this.reference.collection('posts').add(postConverter.toFirestore(post))
+      .then(postRef => postRef.withConverter(postConverter).get().then(snapshot => snapshot.data()))
+      .catch(error => error)
+  }
+
+  async allPosts() {
+    this.posts = []
+    const querySnapshot = await this.reference.collection('posts').withConverter(postConverter).get()
+    querySnapshot.forEach(snapshot => this.posts.push(snapshot.data()))
+    return this.posts
+  }
+
+}
+
+const topicSlugGenerator = (string) => {
+  const wordArr = string.split(" ").map(word => word.toLowerCase().trim())
+  const filtered = wordArr.map(word => {
+    return word.replace(/[^a-zA-Z0-9]/g, "")
+  })
+  return filtered.join("-")
 }
 
 const topicConverter = {
@@ -42,4 +62,5 @@ const topicConverter = {
 export {
   TopicModel,
   topicConverter,
+  topicSlugGenerator,
 }
