@@ -1,13 +1,25 @@
 <template>
   <div>
-    <div class="container p-0" v-if="this.post">
-      <div class="card shadow m-1 p-2">
-        <b-icon v-if="owner" class="mb-2 edit-buttton position-absolute" icon="pencil-square" variant="" @click="toggleEdit"></b-icon>
+    <div class="container p-0 mt-sm-3" v-if="this.post">
+      <div class="card shadow m-sm-1 p-4">
+        <b-icon v-if="owner" class="mb-2 edit-button position-absolute" icon="pencil-square" variant="" @click="toggleEdit"></b-icon>
         <div v-if="!editing" >
-          <h1 class="mb-0"> {{ title }} </h1>
-          <small class="text-muted"> {{ displayName }} </small>
-          <small class="text-muted"> {{ post.createdAt }} </small>
-          <p> {{ body }} </p>
+          <!-- display title -->
+          <h2 class="mb-0"> {{ title }} </h2>
+          <!-- HR -->
+          <hr class="hr-eturo p-1"/>
+          <section class="d-flex justify-content-between">
+            <!-- post details -->
+            <div>
+            <h5 class="text-muted"> {{ post.createdAt }} | Posted by {{ displayName }} </h5>
+            </div>
+            <!-- apples -->
+            <div>
+              apple goes here
+            </div>
+          </section>
+          <!-- display main body -->
+          <p class="post-body p-4 mt-4"> {{ body }} </p>
         </div>
         <div v-if="owner && editing" >
           <NewPost
@@ -18,6 +30,16 @@
           <button @click="$emit('destroy-post', post.id)" class="btn btn-sm btn-danger"> delete </button>
           <hr />
         </div>
+        <h3>Comments</h3>
+
+        <hr>
+        <!-- Display random image every refresh -->
+        <img v-if="randomPic==0" src="../assets/undraw_content.svg" height="auto" width="200px" class="ml-auto mr-auto mt-3">
+        <img v-else-if="randomPic==1" src="../assets/undraw_share_opinion.svg" height="auto" width="200px" class="ml-auto mr-auto mt-3 mb-3">
+        <img v-else-if="randomPic==2" src="../assets/undraw_online_test.svg" height="auto" width="200px" class="ml-auto mr-auto mt-3 mb-3">
+        <img v-else-if="randomPic==3" src="../assets/undraw_online_discussion.svg" height="auto" width="200px" class="ml-auto mr-auto mt-3 mb-3">
+        <img v-else-if="randomPic==4" src="../assets/undraw_video_call.svg" height="auto" width="200px" class="ml-auto mr-auto mt-3 mb-3">
+        <img v-else-if="randomPic==5" src="../assets/undraw_night_calls.svg" height="auto" width="200px" class="ml-auto mr-auto mt-3 mb-3">
       </div>
     </div>
     <div v-else>
@@ -75,6 +97,9 @@ export default {
       topic: ""
     }
   },
+  created(){
+    this.randomPic = Math.floor(Math.random() * 5)
+  },
   components: {
     Error,
     Loading,
@@ -100,6 +125,16 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+  .hr-eturo{
+    background: linear-gradient(15deg, var(--eturo-main), var(--eturo-accent1));
+  }
+  .post-body{
+    border-radius: 1.25rem !important;
+    border: 1px dotted var(--eturo-main-pos1);
+    font-size: 1.1rem;
+  }.edit-button{
+    right: 14px;
+    top: 14px;
+  }
 </style>

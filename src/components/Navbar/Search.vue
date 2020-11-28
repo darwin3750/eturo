@@ -1,7 +1,7 @@
 <template>
   <div class="navbar-form">
     <b-input-group class="w-100" v-click-outside="closeSearch" @click="viewSearch = true">
-      <b-form-input placeholder="Search from dozens of lessons, topics, and tutorials" 
+      <b-form-input placeholder="Search from dozens of lessons and tutorials..." 
           type="text" class="form-control navbar-search"></b-form-input>
       <b-input-group-append>
         <button class="btn text-contrast border border-contrast">
