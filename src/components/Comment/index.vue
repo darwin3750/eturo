@@ -1,14 +1,16 @@
 <template>
-  <div>
-    <h4> {{ displayName }} </h4>
+  <div class="comment-slug card shadow m-1 p-3">
+      <div class="d-flex justify-content-between">
+        <h4> {{ displayName }} </h4>
+        <a class="a"
+        @click="$emit('destroy-comment', comment.id)"
+        v-if="owner"
+        > delete
+        </a>
+      </div>
+
     <span class="text-muted"> {{ comment.createdAt }} </span>
-    <p> {{ comment.body }} </p>
-    <button
-      @click="$emit('destroy-comment', comment.id)"
-      v-if="owner"
-      class="btn btn-sm btn-danger"
-    > delete
-    </button>
+    <p class="text-truncate pl-4 pr-4"> {{ comment.body }} </p>
   </div>
 </template>
 
@@ -35,6 +37,29 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+  .comment-slug{
+    
+  }
+  .a {
+    color: var(--eturo-main) !important;
+    text-decoration: none !important;
+    background-color: transparent !important;
+    cursor: pointer;
+  }
 
+  .a:hover {
+    color: var(--eturo-main) !important;
+    text-decoration: underline !important;
+  }
+
+  .a:not([href]):not([class]) {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+
+  .a:not([href]):not([class]):hover {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
 </style>

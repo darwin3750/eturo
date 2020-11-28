@@ -15,8 +15,11 @@
             </div>
             <!-- apples -->
             <div>
-              <span> {{ appledUsers.length }} apple(s) </span>
-              <button v-if="!appled" @click="addApple" class="btn btn-sm btn-danger"> apple </button>
+              <span> {{ appledUsers.length }} </span>
+              <a v-if="!appled" @click="addApple" class="btn p-0"> 
+                <img src="../assets/apple.svg" height="auto" width="25px">
+              </a>
+              <img v-else src="../assets/apple.svg" height="auto" width="25px">
             </div>
           </section>
           <!-- display main body -->
