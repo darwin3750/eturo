@@ -10,11 +10,9 @@
         <div class="card shadow p-3">
           <!-- Create new post -->
           <NewPost @submit-post="addPost" ref="newPostForm"/>
-          <!-- Post slugs -->
-          <Post v-for="post in posts" :key="post.id" 
-              :post="post" :topic="currentTopic.id" @destroy-post="destroyPost" />
-
-
+          <div v-for="post in posts" :key="post.id">
+            <Post :post="post" @destroy-post="destroyPost" />
+          </div>
         </div>
       </section>
     </section>

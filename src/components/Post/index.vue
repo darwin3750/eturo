@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'Post', params: { post_uid: post.id, topic_uid: topic } }" class="post-slug card shadow m-1 p-2">
+  <router-link :to="{ name: 'Post', params: { post_uid: post.id, topic_uid: post.topic } }" class="post-slug card shadow m-1 p-2">
     <div >
       <h1 class="mb-0"> {{ title }} </h1>
       <small class="text-muted"> {{ displayName }} </small>
@@ -16,7 +16,7 @@ import { mapGetters } from 'vuex'
 import NewPost from '../../components/Post/Form'
 
 export default {
-  props: ['post', 'topic'],
+  props: ['post'],
   components: {
     NewPost,
   },
@@ -50,7 +50,7 @@ export default {
       const { title, body } = postData
       this.title = title
       this.body = body
-      topicCollection.doc(this.topic).collection('posts').doc(this.post.id).update({
+      topicCollection.doc(this.post.topic).collection('posts').doc(this.post.id).update({
         title, body
       }).then(() => {
         this.toggleEdit()

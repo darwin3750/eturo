@@ -10,6 +10,10 @@ class PostModel {
     this.createdAt = moment(createdAt.toDate()).calendar()
     this.createdBy = createdBy
   }
+
+  setTopic(topicRef) {
+    this.topic = topicRef
+  }
 }
 
 const postConverter = {

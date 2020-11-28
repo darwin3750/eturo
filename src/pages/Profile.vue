@@ -15,11 +15,9 @@
               <b-nav-item link-classes="user-nav" @click="switchTo">Likes </b-nav-item>
             </b-nav>
             <div class="card p-3 maincard">
-              <!-- 
-              <Posts v-if="currentTab = Posts" />
-              <Comments v-else-if="currentTab = Comments" />
-              <Likes v-else-if="currentTab = Likes" /> 
-              -->
+              <div v-if="currentTab === 'Posts'">
+                <Post v-for="post in posts" :key="post.id" :post="post" />
+              </div>
             </div>
           </div>
         </section>
@@ -33,17 +31,33 @@
 </template>
 
 <script>
-import { userCollection } from "../../firebase";
-import { userConverter } from "../models/user";
-import UserInfo from "../components/UserInfo";
-import Error from "../components/404";
-import Loading from "../components/Loading";
+import { mapGetters } from 'vuex'
+import { userCollection, topicCollection } from "../../firebase"
+import { userConverter } from "../models/user"
+import { postConverter } from "../models/post"
+
+import UserInfo from "../components/UserInfo"
+import Error from "../components/404"
+import Loading from "../components/Loading"
+import Post from '../components/Post/index'
 
 export default {
+  computed: {
+    ...mapGetters(['currentUser']),
+  },
   data() {
     return {
+      user: null,
+      failedLoad: false,
       currentTab: "Posts",
-    }
+      posts: [],
+    };
+  },
+  components: {
+    UserInfo,
+    Error,
+    Loading,
+    Post,
   },
   beforeMount() {
     const userId = this.$route.params.uid;
@@ -54,28 +68,39 @@ export default {
       .then((snapshot) => {
         if (!snapshot.exists) {
           this.failedLoad = true;
-          return;
+          return
         }
-        this.user = snapshot.data();
+        this.user = snapshot.data()
+        this.getAllPosts()
       });
+  },
+  watch: {
+    currentTab: function(newTab, oldTab) {
+      console.log('switched tabs, need to fetch for', newTab, 'now')
+    }
   },
   methods: {
     switchTo(e) {
       document.querySelector(".user-nav-active").classList.replace("user-nav-active", "user-nav");
       e.target.classList.replace("user-nav", "user-nav-active");
       this.currentTab = e.target.textContent;
-    }
-  },
-  data() {
-    return {
-      user: null,
-      failedLoad: false,
-    };
-  },
-  components: {
-    UserInfo,
-    Error,
-    Loading,
+    },
+    // get all posts of the user from all topics
+    getAllPosts() {
+      topicCollection.get().then(allTopics => {
+        allTopics.forEach(topic => {
+          topicCollection.doc(topic.id).collection('posts').withConverter(postConverter)
+            .where('createdBy', "==", userCollection.doc(this.$route.params.uid)).get()
+            .then(allPosts => {
+              allPosts.forEach(snapshot => {
+                const post = snapshot.data()
+                post.setTopic(topic.id)
+                this.posts.push(post)
+              })
+            })
+        })
+      })
+    },
   },
 };
 </script>
