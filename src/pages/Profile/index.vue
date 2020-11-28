@@ -7,18 +7,20 @@
           <UserInfo v-bind:user="this.user" />
         </section>
         <!-- User posts/comments/etc -->
-        <section class="col-lg-8 mt-lg-0 mt-3">
-          <div class="card shadow p-3">
+        <section class="col-lg-8 mt-lg-0 mt-3 pb-3 pl-3 pr-3">
+          <div class="shadow">
             <b-nav tabs justified>
               <b-nav-item link-classes="user-nav-active" @click="switchTo">Posts</b-nav-item>
               <b-nav-item link-classes="user-nav" @click="switchTo">Comments</b-nav-item>
               <b-nav-item link-classes="user-nav" @click="switchTo">Likes </b-nav-item>
             </b-nav>
-            <!-- 
-            <Posts v-if="currentTab = Posts" />
-            <Comments v-else-if="currentTab = Comments" />
-            <Likes v-else-if="currentTab = Likes" /> 
-            -->
+            <div class="card p-3 maincard">
+              <!-- 
+              <Posts v-if="currentTab = Posts" />
+              <Comments v-else-if="currentTab = Comments" />
+              <Likes v-else-if="currentTab = Likes" /> 
+              -->
+            </div>
           </div>
         </section>
       </section>
@@ -83,6 +85,8 @@ export default {
     color: var(--eturo-main-pos2);
     background: var(--eturo-main-neg6);
     border-color: var(--eturo-main-neg2);
+    margin-left: 1px;
+    margin-right: 1px;
   }
   .user-nav:hover{
     color: var(--eturo-base);
@@ -93,5 +97,8 @@ export default {
     color: var(--eturo-contrast);
     background: var(--eturo-main);
     border-color: var(--eturo-base);
+  }
+  .maincard{
+    border-radius: 0 0 0.25rem 0.25rem;
   }
 </style>
