@@ -33,11 +33,11 @@
 </template>
 
 <script>
-import { userCollection } from "../../../firebase";
-import { userConverter } from "../../models/user";
-import UserInfo from "../../components/UserInfo";
-import Error from "../../components/404";
-import Loading from "../../components/Loading";
+import { userCollection } from "../../firebase";
+import { userConverter } from "../models/user";
+import UserInfo from "../components/UserInfo";
+import Error from "../components/404";
+import Loading from "../components/Loading";
 
 export default {
   data() {
