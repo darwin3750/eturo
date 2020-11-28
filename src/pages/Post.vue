@@ -15,7 +15,7 @@
             ref="editPostForm"
             @submit-post="updatePost"
           />
-          <button @click="$emit('destroy-post', post.id)" class="btn btn-sm btn-danger"> delete </button>
+          <button @click="destroyPost" class="btn btn-sm btn-danger"> delete </button>
           <hr />
         </div>
       </div>
@@ -30,7 +30,6 @@
 <script>
 import { userCollection, topicCollection } from "../../firebase";
 import { mapGetters } from 'vuex'
-import { userConverter } from "../models/user";
 import { topicConverter } from '../models/topic';
 import { postConverter } from '../models/post';
 import NewPost from '../components/Post/Form'
@@ -41,24 +40,30 @@ import Loading from "../components/Loading";
 export default {
   beforeMount() {
     const { post_uid, topic_uid } = this.$route.params;
-    this.topic = topic_uid;
-    
-    topicCollection.doc(this.topic).collection('posts')
-    .doc(post_uid).withConverter(postConverter).get().then((snapshot) => {
-      if (!snapshot.exists) {
-        this.failedLoad = true;
-        return;
-      }
-      this.post = snapshot.data();
+    this.topicId = topic_uid;
 
-      this.title = this.post.title
-      this.body = this.post.body
-      userCollection.doc(this.post.createdBy.id).get().then(snapshot => {
-        const { displayName } = snapshot.data()
-        this.owner = this.currentUser.uid === snapshot.id
-        this.displayName = displayName
-      })
-    });
+    Promise.all([
+      topicCollection.doc(this.topicId).withConverter(topicConverter).get().then(snapshot => {
+        this.topic = snapshot.data()
+      }), // load topic
+      topicCollection.doc(this.topicId).collection('posts')
+      .doc(post_uid).withConverter(postConverter).get().then((snapshot) => {
+        if (!snapshot.exists) {
+          this.failedLoad = true;
+          return;
+        }
+        this.post = snapshot.data();
+
+        this.title = this.post.title
+        this.body = this.post.body
+        userCollection.doc(this.post.createdBy.id).get().then(snapshot => {
+          const { displayName } = snapshot.data()
+          this.owner = this.currentUser.uid === snapshot.id
+          this.displayName = displayName
+        })
+      }), // load actual post
+    ])
+    
   },
   computed: {
     ...mapGetters(['currentUser'])
@@ -72,7 +77,7 @@ export default {
       body: "",
       post: null,
       failedLoad: false,
-      topic: ""
+      topic: "",
     }
   },
   components: {
@@ -88,13 +93,17 @@ export default {
       const { title, body } = postData
       this.title = title
       this.body = body
-      topicCollection.doc(this.topic).collection('posts').doc(this.post.id).update({
+      topicCollection.doc(this.topicId).collection('posts').doc(this.post.id).update({
         title, body
       }).then(() => {
         this.toggleEdit()
       }).catch(() => {
         alert("Failed to update your post! Must be your internet connection...")
       })
+    },
+    async destroyPost() {
+      const res = await this.topic.destroyPost(this.post.id)
+      this.$router.push({ name: "Topic", params: { slug: this.topic.id } })
     },
   },
 }

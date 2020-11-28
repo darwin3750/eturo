@@ -80,17 +80,14 @@ export default {
   methods: {
     async addPost(post) {
       post.createdBy = this.currentUserReference
-      const res = await this.currentTopic.addPost(post)
+      const newPost = await this.currentTopic.addPost(post)
       // only errors has a message property
-      if(!res.message) {
-        this.posts.unshift(res)
+      if(!newPost.message) {
+        newPost.setTopic(this.currentTopic.id)
+        this.posts.unshift(newPost)
         this.$refs.newPostForm.reset()
       }
     },
-    async destroyPost(postId) {
-      const res = await this.currentTopic.destroyPost(postId)
-      this.posts = this.posts.filter(post => post.id != postId)
-    }
   }
 }
 </script>
