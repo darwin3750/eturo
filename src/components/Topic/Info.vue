@@ -1,5 +1,5 @@
 <template>
-  <div class="card shadow p-3">
+  <div class="card shadow p-3 vp-transition" v-in-viewport>
     <b-icon v-if="mod" class="mb-2 edit-buttton position-absolute" icon="pencil-square" variant="" @click="toggleEdit"></b-icon>
     <h1> {{ topic.title }} </h1>
     <span class="font-weight-bolder"> Founded {{ topic.createdAt }} </span>

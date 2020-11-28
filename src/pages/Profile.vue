@@ -8,16 +8,18 @@
         </section>
         <!-- User posts/comments/etc -->
         <section class="col-lg-8 mt-lg-0 mt-3 pb-3 pl-3 pr-3">
-          <div class="shadow">
+          <div class="shadow vp-transition" v-in-viewport>
             <b-nav tabs justified>
               <b-nav-item link-classes="user-nav-active" @click="switchTo">Posts</b-nav-item>
               <b-nav-item link-classes="user-nav" @click="switchTo">Comments</b-nav-item>
               <b-nav-item link-classes="user-nav" @click="switchTo">Likes </b-nav-item>
             </b-nav>
             <div class="card p-3 maincard">
-              <div v-if="currentTab === 'Posts'">
-                <Post v-for="post in posts" :key="post.id" :post="post" />
-              </div>
+              <transition name="fade">
+                <div v-if="currentTab === 'Posts'">
+                  <Post v-for="post in posts" :key="post.id" :post="post" />
+                </div>
+              </transition>
             </div>
           </div>
         </section>
@@ -114,16 +116,28 @@ export default {
     margin-right: 1px;
   }
   .user-nav:hover{
-    color: var(--eturo-base);
+    color: var(--eturo-main-pos6);
     background: var(--eturo-main-neg4);
     border-color: var(--eturo-main-neg2);
+    border: 1px solid var(--eturo-main-pos1);
   }
   .user-nav-active{
     color: var(--eturo-contrast);
     background: var(--eturo-main);
     border-color: var(--eturo-base);
   }
+  .user-nav-active:hover{
+    border: 1px solid var(--eturo-main-pos1);
+  }
   .maincard{
-    border-radius: 0 0 0.25rem 0.25rem;
+    border-radius: 0 0 0.35rem 0.35rem;
+    border: 1px solid var(--eturo-main-pos1);
+    
+  }
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
   }
 </style>

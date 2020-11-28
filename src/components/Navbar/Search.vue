@@ -11,8 +11,8 @@
     </b-input-group>
     <!-- DROPDOWN -->
     <transition name="slide">
-      <div v-if="viewSearch" class="card shadow w-100 position-absolute p-3 dropdown-menu dropdown-content">
-        <router-link class="topic" v-for="topic in topics" :key="topic.id" :to="{ name: 'Topic', params: { slug: topic.id } }"> 
+      <div v-if="viewSearch" class="card shadow w-100 position-absolute dropdown-menu dropdown-content">
+        <router-link class="topic p-2" v-for="topic in topics" :key="topic.id" :to="{ name: 'Topic', params: { slug: topic.id } }"> 
           {{ topic.title }}
         </router-link>
       </div>
@@ -73,8 +73,16 @@
   }.dropdown-menu::-webkit-scrollbar-track {
     background: var(--eturo-main-neg6);
   }
-
   .slide-enter, .slide-leave-to{
     transform: scaleY(0);
+  }
+  .topic{
+    color: var(--eturo-main-pos4);
+    transition: 0.4s;
+  }
+  .topic:hover{
+    color: var(--eturo-main-pos4);
+    text-decoration: none;
+    background: var(--eturo-accent1);
   }
 </style>
