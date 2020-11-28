@@ -4,7 +4,7 @@ import { auth } from '../../firebase'
 
 import Home from '../pages/Home'
 import BadgesInfo from '../pages/BadgesInfo'
-import Profile from '../pages/Profile/'
+import Profile from '../pages/Profile'
 import Login from '../pages/Login'
 import Signup from '../pages/Signup'
 // import NotFound from '../pages/404'
