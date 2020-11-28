@@ -2,8 +2,7 @@
   <router-link :to="{ name: 'Post', params: { post_uid: post.id, topic_uid: post.topic } }" class="post-slug card shadow m-1 p-2">
     <div >
       <h1 class="mb-0"> {{ title }} </h1>
-      <small class="text-muted"> {{ displayName }} </small>
-      <small class="text-muted"> {{ post.createdAt }} </small>
+      <span class="text-muted"> Created by {{ displayName }} | {{ post.createdAt }} </span>
       <p class="text-truncate"> {{ body }} </p>
     </div>
   </router-link>
@@ -67,5 +66,12 @@ export default {
     max-height: 10rem !important;
     overflow-y: hidden;
     text-overflow: ellipsis;
+    color: var(--eturo-main-pos2) !important;
+    transition: 0.5s;
+  }.post-slug:hover{
+    text-decoration: none !important;
+    color: var(--eturo-main-pos2) !important;
+    background: rgb(228, 228, 228);
+    border: 2px solid var(--eturo-main-pos1);
   }
 </style>

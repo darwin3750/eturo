@@ -5,8 +5,8 @@
       <!-- Username -->
       <label data-toggle="tooltip" data-placement="right" class="underline-dotted"
           title="This is how other users of eTuro see you.">Username:</label>
-      <h1 v-if="!editing"> {{ this.displayName }} </h1>
-      <input class="h1" v-else type="text" v-model="displayName" />
+      <h2 v-if="!editing"> {{ this.displayName }} </h2>
+      <input class="h2" v-else type="text" v-model="displayName" />
       <!-- Bio -->
       <label data-toggle="tooltip" data-placement="right" class="underline-dotted"
           title="A brief description of you.">Bio:</label>
@@ -16,7 +16,7 @@
       <div v-else-if="owner && editing" class="form-group">
         <textarea class="form-control" v-model="bio">
         </textarea>
-        <input type="submit" value="update info" class="mt-2 btn btn-block btn-eturo" @click="updateInfo"/>
+        <input type="submit" value="confirm changes" class="mt-2 btn btn-block btn-eturo" @click="updateInfo"/>
       </div>
       <!-- Badges -->
       <label data-toggle="tooltip" data-placement="right" class="underline-dotted"
@@ -32,16 +32,16 @@
       <img src="../assets/undraw_profile.svg" height="auto" width="200px" class="ml-auto mr-auto mt-3"><br/>
     </section>
     <!-- Posts, Comments, and Likes count -->
-    <section class="card shadow p-3 d-flex flex-row mt-3">
-      <div class="flex-fill">
+    <section class="card shadow d-flex flex-row mt-3 rounded-lg">
+      <div class="flex-fill p-3">
         <h5 class="text-center">Posts</h5>
         <p class="text-center">123</p>
       </div>
-      <div class="flex-fill">
+      <div class="flex-fill p-3">
         <h5 class="text-center">Comments</h5>
         <p class="text-center">123</p>
       </div>
-      <div class="flex-fill">
+      <div class="flex-fill p-3">
         <h5 class="text-center">Likes</h5>
         <p class="text-center">123</p>
       </div>
@@ -105,5 +105,9 @@ export default {
   }
   .hr-eturo{
     background: linear-gradient(15deg, var(--eturo-main), var(--eturo-accent1));
+  }
+  .flex-fill:hover{
+    background: rgb(223, 223, 223);
+    transition: 0.4s;
   }
 </style>

@@ -114,16 +114,21 @@ export default {
     margin-right: 1px;
   }
   .user-nav:hover{
-    color: var(--eturo-base);
+    color: var(--eturo-main-pos6);
     background: var(--eturo-main-neg4);
     border-color: var(--eturo-main-neg2);
+    border: 1px solid var(--eturo-main-pos1);
   }
   .user-nav-active{
     color: var(--eturo-contrast);
     background: var(--eturo-main);
     border-color: var(--eturo-base);
   }
+  .user-nav-active:hover{
+    border: 1px solid var(--eturo-main-pos1);
+  }
   .maincard{
-    border-radius: 0 0 0.25rem 0.25rem;
+    border-radius: 0 0 0.35rem 0.35rem;
+    border: 1px solid var(--eturo-main-pos1);
   }
 </style>
