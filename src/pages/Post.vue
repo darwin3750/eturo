@@ -40,12 +40,11 @@ import Loading from "../components/Loading";
 
 export default {
   beforeMount() {
-    const postId = this.$route.params.post_uid;
-    const topicId = this.$route.params.topic_uid;
-    this.topic = topicId;
+    const { post_uid, topic_uid } = this.$route.params;
+    this.topic = topic_uid;
     
-    topicCollection.doc(topicId).collection('posts')
-    .doc(postId).withConverter(postConverter).get().then((snapshot) => {
+    topicCollection.doc(this.topic).collection('posts')
+    .doc(post_uid).withConverter(postConverter).get().then((snapshot) => {
       if (!snapshot.exists) {
         this.failedLoad = true;
         return;
