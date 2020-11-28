@@ -1,30 +1,51 @@
 <template>
-  <div class="card shadow p-3">
-    <b-icon v-if="owner" class="mb-2 edit-buttton position-absolute" icon="pencil-square" variant="" @click="toggleEdit"></b-icon>
-    <!-- Username -->
-    <label data-toggle="tooltip" data-placement="right" class="underline-dotted"
-        title="This is how other users of eTuro see you.">Username:</label>
-    <h1 v-if="!editing"> {{ this.displayName }} </h1>
-    <input class="h1" v-else type="text" v-model="displayName" />
-    <!-- Bio -->
-    <label data-toggle="tooltip" data-placement="right" class="underline-dotted"
-        title="A brief description of you.">Bio:</label>
-    <div v-if="!editing">
-      <p> {{ this.bio }} </p>
-    </div>
-    <div v-else-if="owner && editing" class="form-group">
-      <textarea class="form-control" v-model="bio">
-      </textarea>
-      <input type="submit" value="update info" class="mt-2 btn btn-block btn-eturo" @click="updateInfo"/>
-    </div>
-    <!-- Badges -->
-    <label data-toggle="tooltip" data-placement="right" class="underline-dotted"
-        title="Your earned badges.">Badges:</label>
-    <!-- HR -->
-    <hr class="hr-eturo p-1"/>
-    <small class="text-right"> Joined {{ this.user.createdAt }} </small>
-    <!-- SVG -->
-    <img src="../assets/undraw_profile.svg" height="auto" width="200px" class="ml-auto mr-auto mt-3"><br/>
+  <div>
+    <section class="card shadow p-3">
+      <b-icon v-if="owner" class="mb-2 edit-buttton position-absolute" icon="pencil-square" variant="" @click="toggleEdit"></b-icon>
+      <!-- Username -->
+      <label data-toggle="tooltip" data-placement="right" class="underline-dotted"
+          title="This is how other users of eTuro see you.">Username:</label>
+      <h1 v-if="!editing"> {{ this.displayName }} </h1>
+      <input class="h1" v-else type="text" v-model="displayName" />
+      <!-- Bio -->
+      <label data-toggle="tooltip" data-placement="right" class="underline-dotted"
+          title="A brief description of you.">Bio:</label>
+      <div v-if="!editing">
+        <p> {{ this.bio }} </p>
+      </div>
+      <div v-else-if="owner && editing" class="form-group">
+        <textarea class="form-control" v-model="bio">
+        </textarea>
+        <input type="submit" value="update info" class="mt-2 btn btn-block btn-eturo" @click="updateInfo"/>
+      </div>
+      <!-- Badges -->
+      <label data-toggle="tooltip" data-placement="right" class="underline-dotted"
+          title="Your earned badges. Click for more information.">Badges: 
+          <router-link class="cursor-pointer" to="/badgesinfo">
+            <b-icon icon="question-circle"></b-icon>
+          </router-link>
+          </label>
+      <!-- HR -->
+      <hr class="hr-eturo p-1"/>
+      <small class="text-right"> Joined {{ this.user.createdAt }} </small>
+      <!-- SVG -->
+      <img src="../assets/undraw_profile.svg" height="auto" width="200px" class="ml-auto mr-auto mt-3"><br/>
+    </section>
+    <!-- Posts, Comments, and Likes count -->
+    <section class="card shadow p-3 d-flex flex-row mt-3">
+      <div class="flex-fill">
+        <h5 class="text-center">Posts</h5>
+        <p class="text-center">123</p>
+      </div>
+      <div class="flex-fill">
+        <h5 class="text-center">Comments</h5>
+        <p class="text-center">123</p>
+      </div>
+      <div class="flex-fill">
+        <h5 class="text-center">Likes</h5>
+        <p class="text-center">123</p>
+      </div>
+    </section>
   </div>
 </template>
 

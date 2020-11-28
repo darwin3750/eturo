@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import { auth } from '../../firebase'
 
 import Home from '../pages/Home'
+import BadgesInfo from '../pages/BadgesInfo'
 import Profile from '../pages/Profile/'
 import Login from '../pages/Login'
 import Signup from '../pages/Signup'
@@ -44,6 +45,11 @@ const routes = [
     path: '/profile/:uid',
     name: 'Profile',
     component: Profile,
+  },
+  {
+    path: '/badgesinfo',
+    name: 'BadgesInfo',
+    component: BadgesInfo,
   },
   {
     path: '/t/new',

@@ -180,3 +180,24 @@ body::-webkit-scrollbar {
 .show > .btn-outline-eturo.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
 }
+
+.reg-text {
+  font-family: InterRegular;
+  src: url(Inter/Inter-Regular-slnt=0.ttf);
+}
+.semibold-text {
+  font-family: InterSemiBold;
+  src: url(Inter/Inter-SemiBold-slnt=0.ttf);
+}
+.bold-text {
+  font-family: InterBold;
+  src: url(Inter/Inter-Bold-slnt=0.ttf);
+}
+.black-text {
+  font-family: InterBlack;
+  src: url(Inter/Inter-Black-slnt=0.ttf);
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
