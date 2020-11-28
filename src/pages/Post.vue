@@ -15,7 +15,8 @@
             </div>
             <!-- apples -->
             <div>
-              apple goes here
+              <span> {{ appledUsers.length }} apple(s) </span>
+              <button v-if="!appled" @click="addApple" class="btn btn-sm btn-danger"> apple </button>
             </div>
           </section>
           <!-- display main body -->
@@ -57,6 +58,7 @@ import { mapGetters } from 'vuex'
 import { topicConverter } from '../models/topic';
 import { postConverter } from '../models/post';
 
+import Post from '../components/Post/'
 import NewPost from '../components/Post/Form'
 import Comment from '../components/Comment/'
 import NewComment from '../components/Comment/Form'
@@ -84,6 +86,11 @@ export default {
         this.post = snapshot.data();
         // actually get comments
         this.post.getAllComments().then(comments => this.comments = comments)
+        // load all post apples
+        this.post.getAllApples().then(apples => {
+          this.appledUsers = apples
+          this.appled = !!this.appledUsers.find(apple => this.currentUser.uid === apple.createdBy.id)
+        })
 
         this.title = this.post.title
         this.body = this.post.body
@@ -112,6 +119,8 @@ export default {
       title: "",
       body: "",
       topic: "",
+      appledUsers: [],
+      appled: true,
     }
   },
   created(){
@@ -120,6 +129,7 @@ export default {
   components: {
     Error,
     Loading,
+    Post,
     NewPost,
     Comment,
     NewComment,
@@ -160,6 +170,15 @@ export default {
         alert("Failed to delete the comment! Must be your internet connection...")
       }
     },
+    async addApple() {
+      const newApple = await this.post.addApple({ createdBy: this.currentUserReference })
+      if (!newApple.message) {
+        this.appled = true
+        this.appledUsers.push(newApple)
+      } else {
+        alert("Had trouble giving an apple! Must be your internet connection...")
+      }
+    }
   },
 }
 </script>

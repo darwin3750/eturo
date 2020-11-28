@@ -42,8 +42,8 @@
         <p class="text-center"> {{ stats.comments }} </p>
       </div>
       <div class="flex-fill p-3">
-        <h5 class="text-center">Likes</h5>
-        <p class="text-center">123</p>
+        <h5 class="text-center">Apples Given</h5>
+        <p class="text-center">{{ stats.apples }}</p>
       </div>
     </section>
   </div>
