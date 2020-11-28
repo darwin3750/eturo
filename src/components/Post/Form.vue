@@ -1,7 +1,6 @@
 <template>
-  <form @submit.prevent @submit="$emit('new-post', { title, body })">
+  <form @submit.prevent @submit="$emit('submit-post', { title, body })">
     <div class="form-group">
-      <h3> Add a post! </h3>
       <label> Title </label>
       <input v-model="title" type="text" class="form-control"/>
       <label> Body </label>
@@ -13,6 +12,14 @@
 
 <script>
 export default {
+  props: ['post'],
+  beforeMount() {
+    if (this.post) {
+      const { title, body } = this.post
+      this.title = title
+      this.body = body
+    }
+  },
   data() {
     return {
       title: "",

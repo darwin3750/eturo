@@ -8,9 +8,9 @@
       <!-- Topic posts -->
       <section class="col-lg-8">
         <div class="card shadow p-3">
-          <NewPost @new-post="addPost" ref="newPostForm"/>
+          <NewPost @submit-post="addPost" ref="newPostForm"/>
           <div v-for="post in posts" :key="post.id">
-            <Post :post="post" />
+            <Post :post="post" :topic="currentTopic.id" @destroy-post="destroyPost" />
           </div>
         </div>
       </section>
@@ -25,7 +25,7 @@ import { topicConverter } from '../../models/topic'
 
 import Info from '../../components/Topic/Info'
 import Post from '../../components/Post/'
-import NewPost from '../../components/Post/New'
+import NewPost from '../../components/Post/Form'
 import { PostModel } from '../../models/post'
 
 export default {
@@ -69,6 +69,10 @@ export default {
         this.$refs.newPostForm.reset()
       }
     },
+    async destroyPost(postId) {
+      const res = await this.currentTopic.destroyPost(postId)
+      this.posts = this.posts.filter(post => post.id != postId)
+    }
   }
 }
 </script>

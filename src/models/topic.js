@@ -34,6 +34,12 @@ class TopicModel {
     return this.posts
   }
 
+  async destroyPost(postId) {
+    return await this.reference.collection('posts').doc(postId)
+      .delete(() => true)
+      .catch(error => error)
+  }
+
 }
 
 const topicSlugGenerator = (string) => {
