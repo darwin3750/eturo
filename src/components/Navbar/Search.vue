@@ -2,10 +2,16 @@
   <div class="navbar-form">
     <b-input-group class="w-100" v-click-outside="closeSearch" @click="viewSearch = true">
       <b-form-input placeholder="Search from dozens of lessons, topics, and tutorials" 
-          type="text" class="form-control navbar-search"></b-form-input>
+        type="text"
+        class="form-control navbar-search"
+        @keyup.13="search"
+        autocomplete="off"
+        v-model="query"
+      >
+      </b-form-input>
       <b-input-group-append>
         <button class="btn text-contrast border border-contrast">
-          <b-icon icon="search"/>
+          <b-icon icon="search" @click="search"/>
         </button>
       </b-input-group-append>
     </b-input-group>
@@ -15,6 +21,7 @@
         <router-link class="topic" v-for="topic in topics" :key="topic.id" :to="{ name: 'Topic', params: { slug: topic.id } }"> 
           {{ topic.title }}
         </router-link>
+        <router-link class="topic" to="/topic/new"> New Topic </router-link>
       </div>
     </transition>
   </div>
@@ -27,7 +34,9 @@
     data() {
       return {
         viewSearch: false,
-        topics: []
+        query: "",
+        topics: [],
+        actualTopics: [],
       }
     },
     beforeMount() {
@@ -41,12 +50,15 @@
             ...topicSnapshot
           })
         })
-        this.topics = topicArray
+        this.actualTopics= topicArray
       });
     }, // beforeMount
     methods: {
       closeSearch(){
         this.viewSearch = false;
+      },
+      search() {
+        this.topics = this.actualTopics.filter(topic => topic.title.includes(this.query))
       }
     }, // methods
   }
