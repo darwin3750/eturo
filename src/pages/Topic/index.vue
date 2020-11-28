@@ -8,10 +8,13 @@
       <!-- Topic posts -->
       <section class="col-lg-8">
         <div class="card shadow p-3">
+          <!-- Create new post -->
           <NewPost @submit-post="addPost" ref="newPostForm"/>
-          <div v-for="post in posts" :key="post.id">
-            <Post :post="post" :topic="currentTopic.id" @destroy-post="destroyPost" />
-          </div>
+          <!-- Post slugs -->
+          <Post v-for="post in posts" :key="post.id" 
+              :post="post" :topic="currentTopic.id" @destroy-post="destroyPost" />
+
+
         </div>
       </section>
     </section>
