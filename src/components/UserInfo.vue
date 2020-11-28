@@ -35,11 +35,11 @@
     <section class="card shadow d-flex flex-row mt-3 rounded-lg vp-transition" v-in-viewport>
       <div class="flex-fill p-3">
         <h5 class="text-center">Posts</h5>
-        <p class="text-center">123</p>
+        <p class="text-center"> {{ stats.posts }} </p>
       </div>
       <div class="flex-fill p-3">
         <h5 class="text-center">Comments</h5>
-        <p class="text-center">123</p>
+        <p class="text-center"> {{ stats.comments }} </p>
       </div>
       <div class="flex-fill p-3">
         <h5 class="text-center">Likes</h5>
@@ -54,7 +54,7 @@ import { auth, userCollection } from '../../firebase'
 import { mapGetters } from 'vuex'
 
 export default {
-  props: ['user'],
+  props: ['user', 'stats'],
   beforeMount() {
     this.owner = this.currentUser.uid === this.$route.params.uid
     const { displayName, bio } = this.user

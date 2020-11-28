@@ -32,7 +32,6 @@ class TopicModel {
     const querySnapshot = await this.reference.collection('posts').withConverter(postConverter).get()
     querySnapshot.forEach(snapshot => {
       const post = snapshot.data()
-      post.setTopic(this.id)
       this.posts.push(post)
     })
     return this.posts

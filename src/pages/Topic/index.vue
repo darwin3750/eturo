@@ -17,7 +17,7 @@
                 </b-collapse>
               </div>
             <div v-for="post in posts" :key="post.id" class="pl-3 pr-3 pt-1 pb-1">
-              <Post :post="post" @destroy-post="destroyPost" />
+              <Post :post="post" />
             </div>
 
             <img src="../../assets/undraw_done.svg" height="auto" width="200px" class="ml-auto mr-auto mt-3">
@@ -80,17 +80,14 @@ export default {
   methods: {
     async addPost(post) {
       post.createdBy = this.currentUserReference
-      const res = await this.currentTopic.addPost(post)
+      post.topic = topicCollection.doc(this.currentTopic.id)
+      const newPost = await this.currentTopic.addPost(post)
       // only errors has a message property
-      if(!res.message) {
-        this.posts.unshift(res)
+      if(!newPost.message) {
+        this.posts.unshift(newPost)
         this.$refs.newPostForm.reset()
       }
     },
-    async destroyPost(postId) {
-      const res = await this.currentTopic.destroyPost(postId)
-      this.posts = this.posts.filter(post => post.id != postId)
-    }
   }
 }
 </script>

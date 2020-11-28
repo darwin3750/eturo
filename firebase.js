@@ -28,4 +28,5 @@ export {
   auth,
   userCollection,
   topicCollection,
+  firebase,
 }
