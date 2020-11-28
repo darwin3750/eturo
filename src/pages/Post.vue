@@ -9,7 +9,7 @@
           <small class="text-muted"> {{ post.createdAt }} </small>
           <p> {{ body }} </p>
           <hr />
-          <Comment v-for="comment in comments" :key="comment.id" :comment="comment" />
+          <Comment v-for="comment in comments" :key="comment.id" :comment="comment" @destroy-comment="destroyComment" />
           <hr />
           <NewComment @new-comment="addComment" ref="newCommentForm"/>
         </div>
@@ -129,6 +129,14 @@ export default {
       if(!newComment.message) {
         this.comments.push(newComment)
         this.$refs.newCommentForm.reset()
+      }
+    },
+    async destroyComment(commentId) {
+      const res = await this.post.destroyComment(commentId)
+      if(res) {
+        this.comments = this.comments.filter(comment => comment.id != commentId)
+      } else {
+        alert("Failed to delete the comment! Must be your internet connection...")
       }
     },
   },

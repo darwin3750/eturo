@@ -3,6 +3,12 @@
     <h4> {{ displayName }} </h4>
     <span class="text-muted"> {{ comment.createdAt }} </span>
     <p> {{ comment.body }} </p>
+    <button
+      @click="$emit('destroy-comment', comment.id)"
+      v-if="owner"
+      class="btn btn-sm btn-danger"
+    > delete
+    </button>
   </div>
 </template>
 
@@ -15,13 +21,14 @@ export default {
   beforeMount() {
     userCollection.doc(this.comment.createdBy.id).withConverter(userConverter).get()
       .then(snapshot => {
-        const { displayName } = snapshot.data()
-        console.log('snapshot:', snapshot.data())
+        const { displayName, id } = snapshot.data()
         this.displayName = displayName
+        this.owner = this.$store.getters.currentUser.uid === id
       })
   },
   data() {
     return {
+      owner: false,
       displayName: "",
     }
   },

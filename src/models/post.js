@@ -31,6 +31,16 @@ class PostModel {
       .then(snapshot => snapshot.data()))
       .catch(error => error)
   }
+
+  async destroyComment(commentId) {
+    try {
+      await topicCollection.doc(this.topic).collection('posts')
+        .doc(this.id).collection('comments').doc(commentId).delete()
+    } catch(error) {
+      return false
+    }
+    return true
+  }
 }
 
 const postConverter = {
