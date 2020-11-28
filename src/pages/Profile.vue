@@ -97,7 +97,7 @@ export default {
             this.posts = querySnapshot.docs.map(snapshot => {
               // just get the apples in between, yeah?
               const post = snapshot.data()
-              post.getAllApples().then(x => this.applesGiven += x.length)
+              post.getAllApples().then(x => this.applesReceived += x.length)
               return post
             })
           })
@@ -105,7 +105,7 @@ export default {
         firebase.firestore().collectionGroup('apples')
           .where('createdBy', '==', userCollection.doc(userId)).withConverter(postConverter).get()
           .then(querySnapshot => {
-            this.applesReceived = querySnapshot.docs.length
+            this.applesGiven = querySnapshot.docs.length
           })
         });
         // yes, the indent is like this
