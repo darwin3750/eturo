@@ -87,6 +87,7 @@
 }
 
 .text-contrast{color: var(--eturo-contrast) !important;}
+.text-accent1{color: var(--eturo-accent1) !important;}
 .border-contrast{border-color: var(--eturo-contrast) !important;}
 .extend-below{min-height: 100vh;}
 

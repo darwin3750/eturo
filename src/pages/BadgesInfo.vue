@@ -36,7 +36,7 @@ export default {
         {title: "Seasoned Savant", description: "Watch 20 educational videos and read 20 articles.", type: "learning", icon: "seasoned_savant.png"},
         {title: "Formidable Expert", description: "Watch 30 educational videos and read 30 articles.", type: "learning", icon: "formidable_expert.png"},
         
-        {title: "Contributor", description: "Sign up with an account.", type: "miscellaneous ", icon: "contributor.png"},
+        {title: "Contributor", description: "Sign up with an account.", type: "miscellaneous ", icon: "the_recruit.png"},
         {title: "Locked and Loaded", description: "Download a document/file.", type: "miscellaneous ", icon: "locked_and_loaded.png"},
         {title: "The Eager Learner", description: "Request for new content.", type: "miscellaneous ", icon: "the_eager_learner.png"},
         {title: "Praiseworthy Proofreader", description: "Become an editor for the platform.", type: "miscellaneous ", icon: "praiseworthy_proofreader.png"},
