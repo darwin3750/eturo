@@ -10,16 +10,15 @@
         <section class="col-lg-8 mt-lg-0 mt-3">
           <div class="card shadow p-3">
             <b-nav tabs justified>
-              <b-nav-item active>Posts</b-nav-item>
-              <b-nav-item>Comments</b-nav-item>
-              <b-nav-item>Likes </b-nav-item>
+              <b-nav-item link-classes="user-nav-active" @click="switchTo">Posts</b-nav-item>
+              <b-nav-item link-classes="user-nav" @click="switchTo">Comments</b-nav-item>
+              <b-nav-item link-classes="user-nav" @click="switchTo">Likes </b-nav-item>
             </b-nav>
-            <p class="">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Laboriosam, laudantium at modi rem quod ex provident quaerat
-              incidunt quo ducimus praesentium atque perferendis fugiat
-              veritatis ipsum suscipit quas saepe similique!
-            </p>
+            <!-- 
+            <Posts v-if="currentTab = Posts" />
+            <Comments v-else-if="currentTab = Comments" />
+            <Likes v-else-if="currentTab = Likes" /> 
+            -->
           </div>
         </section>
       </section>
@@ -39,6 +38,11 @@ import Error from "../../components/404";
 import Loading from "../../components/Loading";
 
 export default {
+  data() {
+    return {
+      currentTab: "Posts",
+    }
+  },
   beforeMount() {
     const userId = this.$route.params.uid;
     userCollection
@@ -52,6 +56,13 @@ export default {
         }
         this.user = snapshot.data();
       });
+  },
+  methods: {
+    switchTo(e) {
+      document.querySelector(".user-nav-active").classList.replace("user-nav-active", "user-nav");
+      e.target.classList.replace("user-nav", "user-nav-active");
+      this.currentTab = e.target.textContent;
+    }
   },
   data() {
     return {
@@ -67,5 +78,20 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+  .user-nav{
+    color: var(--eturo-main-pos2);
+    background: var(--eturo-main-neg6);
+    border-color: var(--eturo-main-neg2);
+  }
+  .user-nav:hover{
+    color: var(--eturo-base);
+    background: var(--eturo-main-neg4);
+    border-color: var(--eturo-main-neg2);
+  }
+  .user-nav-active{
+    color: var(--eturo-contrast);
+    background: var(--eturo-main);
+    border-color: var(--eturo-base);
+  }
 </style>

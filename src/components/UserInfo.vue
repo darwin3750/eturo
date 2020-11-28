@@ -23,9 +23,8 @@
     <!-- HR -->
     <hr class="hr-eturo p-1"/>
     <small class="text-right"> Joined {{ this.user.createdAt }} </small>
-    <br/>
     <!-- SVG -->
-    <img src="../assets/undraw_profile.svg" height="auto" width="200px" class="ml-auto mr-auto"><br/>
+    <img src="../assets/undraw_profile.svg" height="auto" width="200px" class="ml-auto mr-auto mt-3"><br/>
   </div>
 </template>
 
