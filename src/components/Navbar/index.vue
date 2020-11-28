@@ -15,19 +15,14 @@
     <b-collapse id="nav-collapse" is-nav>
       <hr class="p-1 d-lg-none d-block">
       <b-navbar-nav class="ml-auto">
-        <!-- The search bar -->
-        <div class="navbar-form">
-          <b-input-group class="w-100">
-            <b-form-input placeholder="Search from dozens of lessons, topics, and tutorials" 
-                type="text" class="form-control navbar-search"></b-form-input>
-            <b-input-group-append>
-              <button class="btn text-contrast border border-contrast">
-                <b-icon icon="search"/>
-              </button>
-            </b-input-group-append>
-          </b-input-group>
-        </div>
 
+
+
+        <!-- The search bar -->
+        <Search />
+
+
+        
         <!-- sign in button -->
         <b-nav-item class="nav-link p-0" v-if="!loggedIn" to="/login">
           <button class="text-left btn btn-lg text-contrast">
@@ -96,8 +91,9 @@
 </template>
 
 <script>
-import { auth } from '../../firebase'
+import { auth } from '../../../firebase'
 import { mapGetters } from 'vuex'
+import Search from './Search'
 
 export default {
   computed: {
@@ -105,6 +101,9 @@ export default {
       'loggedIn',
       'currentUser',
     ])
+  },
+  components: {
+    Search,
   },
   data() {
     return {
@@ -151,11 +150,6 @@ export default {
   }
   .nav-link{
     white-space: nowrap !important;
-  }
-  @media (min-width: 992px) {
-    .navbar-search{
-      min-width: 400px !important;
-    }
   }
   .eturo-dropdown-menu{
     background-color: var(--eturo-contrast);
