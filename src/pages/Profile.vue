@@ -20,6 +20,7 @@
                   <Post v-for="post in posts" :key="post.id" :post="post" />
                 </div>
               </transition>
+              <img src="../assets/undraw_done.svg" height="auto" width="200px" class="ml-auto mr-auto mt-3">
             </div>
           </div>
         </section>
@@ -111,7 +112,7 @@ export default {
   .user-nav{
     color: var(--eturo-main-pos2);
     background: var(--eturo-main-neg6);
-    border-color: var(--eturo-main-neg2);
+    border: 2px solid var(--eturo-main-neg2);
     margin-left: 1px;
     margin-right: 1px;
   }
@@ -119,15 +120,15 @@ export default {
     color: var(--eturo-main-pos6);
     background: var(--eturo-main-neg4);
     border-color: var(--eturo-main-neg2);
-    border: 1px solid var(--eturo-main-pos1);
+    border: 2px solid var(--eturo-main-pos1);
   }
   .user-nav-active{
     color: var(--eturo-contrast);
     background: var(--eturo-main);
-    border-color: var(--eturo-base);
+    border: 2px solid var(--eturo-base);
   }
   .user-nav-active:hover{
-    border: 1px solid var(--eturo-main-pos1);
+    border: 2px solid var(--eturo-base);
   }
   .maincard{
     border-radius: 0 0 0.35rem 0.35rem;
