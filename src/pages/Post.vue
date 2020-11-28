@@ -62,8 +62,6 @@ export default {
 
         // load post and comments
         this.post = snapshot.data();
-        // set post topic
-        this.post.setTopic(this.topicId)
         // actually get comments
         this.post.getAllComments().then(comments => this.comments = comments)
 

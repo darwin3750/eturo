@@ -4,7 +4,7 @@
       <section class="row mt-md-3">
         <!-- User info -->
         <section class="col-lg-4">
-          <UserInfo v-bind:user="this.user" />
+          <UserInfo :user="this.user" :stats="{ posts: posts.length, comments: comments.length}" />
         </section>
         <!-- User posts/comments/etc -->
         <section class="col-lg-8 mt-lg-0 mt-3 pb-3 pl-3 pr-3">
@@ -18,6 +18,9 @@
               <transition name="fade">
                 <div v-if="currentTab === 'Posts'">
                   <Post v-for="post in posts" :key="post.id" :post="post" />
+                </div>
+                <div v-if="currentTab ==='Comments'">
+                  <Comment v-for="comment in comments" :key="comment.id" :comment="comment" />
                 </div>
               </transition>
               <img src="../assets/undraw_done.svg" height="auto" width="200px" class="ml-auto mr-auto mt-3">
@@ -35,18 +38,21 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { userCollection, topicCollection } from "../../firebase"
+import { userCollection, topicCollection, firebase } from "../../firebase"
 import { userConverter } from "../models/user"
 import { postConverter } from "../models/post"
+import { commentConverter } from '../models/comment'
 
 import UserInfo from "../components/UserInfo"
 import Error from "../components/404"
 import Loading from "../components/Loading"
+
 import Post from '../components/Post/index'
+import Comment from '../components/Comment/index'
 
 export default {
   computed: {
-    ...mapGetters(['currentUser']),
+    ...mapGetters(['currentUser', 'currentUserReference']),
   },
   data() {
     return {
@@ -54,6 +60,7 @@ export default {
       failedLoad: false,
       currentTab: "Posts",
       posts: [],
+      comments: [],
     };
   },
   components: {
@@ -61,48 +68,37 @@ export default {
     Error,
     Loading,
     Post,
+    Comment,
   },
   beforeMount() {
     const userId = this.$route.params.uid;
-    userCollection
-      .doc(userId)
-      .withConverter(userConverter)
-      .get()
+    userCollection.doc(userId).withConverter(userConverter).get()
       .then((snapshot) => {
         if (!snapshot.exists) {
           this.failedLoad = true;
           return
         }
         this.user = snapshot.data()
-        this.getAllPosts()
-      });
-  },
-  watch: {
-    currentTab: function(newTab, oldTab) {
-      console.log('switched tabs, need to fetch for', newTab, 'now')
-    }
+        // all comments in existence
+        firebase.firestore().collectionGroup('comments')
+          .where('createdBy', '==', userCollection.doc(userId)).withConverter(commentConverter).get()
+          .then(querySnapshot => {
+            this.comments = querySnapshot.docs.map(snapshot => snapshot.data())
+          })
+        // all posts in existence
+        firebase.firestore().collectionGroup('posts')
+          .where('createdBy', '==', userCollection.doc(userId)).withConverter(postConverter).get()
+          .then(querySnapshot => {
+            this.posts = querySnapshot.docs.map(snapshot => snapshot.data())
+          })
+        });
+        // yes, the indent is like this
   },
   methods: {
     switchTo(e) {
       document.querySelector(".user-nav-active").classList.replace("user-nav-active", "user-nav");
       e.target.classList.replace("user-nav", "user-nav-active");
       this.currentTab = e.target.textContent;
-    },
-    // get all posts of the user from all topics
-    getAllPosts() {
-      topicCollection.get().then(allTopics => {
-        allTopics.forEach(topic => {
-          topicCollection.doc(topic.id).collection('posts').withConverter(postConverter)
-            .where('createdBy', "==", userCollection.doc(this.$route.params.uid)).get()
-            .then(allPosts => {
-              allPosts.forEach(snapshot => {
-                const post = snapshot.data()
-                post.setTopic(topic.id)
-                this.posts.push(post)
-              })
-            })
-        })
-      })
     },
   },
 };
