@@ -21,7 +21,7 @@
           <div class="col-md-6 col-lg-5 d-flex flex-column justify-content-center">
             <header class="feature-title">Share Lessons</header>
             <article class="feature-desc">
-              Develop Skills and Knowledge To Thrive In Online Teaching.
+              Develop skills and knowledge to thrive in online teaching.
             </article>
           </div>
           <div class="col-md-6 col-lg-7">
@@ -45,7 +45,7 @@
           <div class="col-md-6 col-lg-5 d-flex flex-column justify-content-center">
             <header class="feature-title text-accent1">Share Materials</header>
             <article class="feature-desc text-accent1">
-              Share and Listen to Ideas Worth Sharing By Scholars Worth Listening.
+              Share ideas worth sharing and listen to scholars worth listening to.
             </article>
           </div>
         </section>
@@ -53,12 +53,12 @@
     </section>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#E76F51" fill-opacity="1" d="M0,160L60,154.7C120,149,240,139,360,133.3C480,128,600,128,720,138.7C840,149,960,171,1080,181.3C1200,192,1320,192,1380,192L1440,192L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path></svg>
     
-    <section id="p4_landing" class="position-relative">
+    <section id="p4_landing" class="position-relative mb-5 pb-5">
       <div class="container">
         <div>
           <header class="feature-title text-center">Badges</header>
           <article class="feature-desc text-center d-md-none d-block">
-            Earn Badges for Learning and Contributing!
+            Earn badges for learning and contributing!
           </article>
           <section class="row mt-md-5 mt-2 mb-3">
             <div class="d-md-block d-none col-md-1"></div>
@@ -70,11 +70,23 @@
             Earn Badges for Learning and Contributing!
           </article>
         </div>
-
       </div>
     </section>
  
-    
+    <section id="p5_landing" class="position-relative">
+      <div class="container p-4">
+        <div class="row">
+          <div class="col-md-4 d-flex align-items-center">
+            <header class="feature-title text-center text-contrast">About eTuro: </header>
+          </div>
+          <div class="col-md-8">
+            <article class="text-contrast about-desc">
+              eTuro is an open source learning platform that uses the Massive Open Online Course (MOOC) Model to deliver educational materials online. eTuro aims to equip educators with essential skills and knowledge to teach in an era where digital learning is ubiquitous and often mandatory in today’s situation. Powered by the community, eTuro reaps the collective knowledge and experience of professionals, students and enthusiasts to share their perspective and knowledge amongst the community.
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
     <!-- <div class="container">
         <section class="row">
           <div v-for="index in 3" :key="index" class="col-4 card p-5 shadow">
@@ -183,6 +195,9 @@ export default {
   width: 7rem;
   height: 7rem;
 }
+#p5_landing {
+  background: var(--eturo-main);
+}
 
 </style>
 
@@ -198,6 +213,12 @@ export default {
   font-family: InterSemiBold;
   color: var();
   line-height: 2.4rem;
+}
+.about-desc{
+  font-size: 1.4rem;
+  font-family: InterRegular;
+  color: var();
+  line-height: 1.8rem;
 }
 
 @media (min-width: 576px) {
