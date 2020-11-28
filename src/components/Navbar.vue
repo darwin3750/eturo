@@ -152,7 +152,7 @@ export default {
   }
   @media (min-width: 992px) {
     .navbar-search{
-      min-width: 400px;
+      min-width: 400px !important;
     }
   }
   .eturo-dropdown-menu{
