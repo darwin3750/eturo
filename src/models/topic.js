@@ -9,7 +9,7 @@ class TopicModel {
     this.title = title
     this.description = description
     this.createdAt = moment(createdAt).calendar()
-    this.createdBy = 'me'
+    this.createdBy = createdBy
     this.reference = topicCollection.doc(this.id)
   }
   // checks if a user is a moderator of this topic
