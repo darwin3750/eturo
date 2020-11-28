@@ -15,9 +15,11 @@
               <b-nav-item link-classes="user-nav" @click="switchTo">Likes </b-nav-item>
             </b-nav>
             <div class="card p-3 maincard">
-              <div v-if="currentTab === 'Posts'">
-                <Post v-for="post in posts" :key="post.id" :post="post" />
-              </div>
+              <transition name="fade">
+                <div v-if="currentTab === 'Posts'">
+                  <Post v-for="post in posts" :key="post.id" :post="post" />
+                </div>
+              </transition>
             </div>
           </div>
         </section>
@@ -130,5 +132,11 @@ export default {
   .maincard{
     border-radius: 0 0 0.35rem 0.35rem;
     border: 1px solid var(--eturo-main-pos1);
+  }
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
   }
 </style>
