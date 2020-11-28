@@ -8,7 +8,7 @@
         </section>
         <!-- User posts/comments/etc -->
         <section class="col-lg-8 mt-lg-0 mt-3 pb-3 pl-3 pr-3">
-          <div class="shadow">
+          <div class="shadow vp-transition" v-in-viewport>
             <b-nav tabs justified>
               <b-nav-item link-classes="user-nav-active" @click="switchTo">Posts</b-nav-item>
               <b-nav-item link-classes="user-nav" @click="switchTo">Comments</b-nav-item>
@@ -132,11 +132,12 @@ export default {
   .maincard{
     border-radius: 0 0 0.35rem 0.35rem;
     border: 1px solid var(--eturo-main-pos1);
+    
   }
   .fade-enter-active, .fade-leave-active {
     transition: opacity .5s;
   }
-  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  .fade-enter, .fade-leave-to {
     opacity: 0;
   }
 </style>

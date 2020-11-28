@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="card shadow p-3">
+    <section class="card shadow p-3 vp-transition" v-in-viewport>
       <b-icon v-if="owner" class="mb-2 edit-buttton position-absolute" icon="pencil-square" variant="" @click="toggleEdit"></b-icon>
       <!-- Username -->
       <label data-toggle="tooltip" data-placement="right" class="underline-dotted"
@@ -32,7 +32,7 @@
       <img src="../assets/undraw_profile.svg" height="auto" width="200px" class="ml-auto mr-auto mt-3"><br/>
     </section>
     <!-- Posts, Comments, and Likes count -->
-    <section class="card shadow d-flex flex-row mt-3 rounded-lg">
+    <section class="card shadow d-flex flex-row mt-3 rounded-lg vp-transition" v-in-viewport>
       <div class="flex-fill p-3">
         <h5 class="text-center">Posts</h5>
         <p class="text-center">123</p>

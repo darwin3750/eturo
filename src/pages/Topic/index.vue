@@ -7,7 +7,7 @@
       </section>
       <!-- Topic posts -->
       <section class="col-lg-8">
-        <div class="card shadow p-3">
+        <div class="card shadow p-3 vp-transition" v-in-viewport>
           <!-- Create new post -->
           <NewPost @submit-post="addPost" ref="newPostForm"/>
           <div v-for="post in posts" :key="post.id">

@@ -68,10 +68,10 @@ export default {
     text-overflow: ellipsis;
     color: var(--eturo-main-pos2) !important;
     transition: 0.5s;
+    border: 1px solid var(--eturo-main-neg4);
   }.post-slug:hover{
     text-decoration: none !important;
     color: var(--eturo-main-pos2) !important;
-    background: rgb(228, 228, 228);
     border: 2px solid var(--eturo-main-pos1);
   }
 </style>

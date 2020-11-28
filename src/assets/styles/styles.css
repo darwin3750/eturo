@@ -201,3 +201,14 @@ body::-webkit-scrollbar {
 .cursor-pointer{
   cursor: pointer;
 }
+
+.vp-transition{
+  opacity: 0;
+  transition: 1.3s;
+  transition-delay: 0.1s;
+  transform: translateY(20px);
+}
+.vp-transition.in-viewport{
+  opacity: 1;
+  transform: translateY(0px);
+}
