@@ -56,7 +56,9 @@
         <b-nav-text class="nav-link p-0 d-lg-none d-block" v-if="loggedIn">
           <div class="text-left text-contrast label-lg">
             <b-icon icon="person-circle"></b-icon> User<hr>
-            <router-link class="nav-link text-contrast" to="/profile">Profile</router-link>
+            <router-link class="nav-link text-contrast" 
+                :to="{ name: 'Profile', params: { uid: this.currentUser.uid } }">Profile
+            </router-link>
             <a class="nav-link text-contrast" @click.prevent @click="logout">Sign Out</a>
           </div>
         </b-nav-text>
