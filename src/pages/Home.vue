@@ -191,7 +191,7 @@ export default {
   font-size: 3.6rem;
   font-family: InterBlack;
   color: var();
-  line-height: 3.7rem;
+  line-height: 4rem;
 }
 .feature-desc{
   font-size: 1.2rem;
