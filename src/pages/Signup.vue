@@ -17,7 +17,7 @@
             />
             <br />
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia possimus asperiores harum voluptatibus ad ipsum commodi itaque, quo, omnis eligendi, consequatur corrupti doloribus voluptas error laborum cum iure? Aspernatur, porro?
+              Know something worth adding? See something worth correcting? Sign Up with eTuro to make changes you want to see!
             </p>
           </div>
         </section>
