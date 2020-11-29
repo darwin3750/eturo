@@ -11,12 +11,19 @@
           <section class="d-flex justify-content-between">
             <!-- post details -->
             <div>
-            <h5 class="text-muted"> {{ post.createdAt }} | Posted by {{ displayName }} </h5>
+            <h5 class="text-muted">
+              <span> {{ post.createdAt }} | </span>
+              <router-link
+                :to="{ name: 'Profile', params: { uid: uid } }">
+                Posted by {{ displayName }}
+              </router-link>
+            </h5>
             </div>
             <!-- apples -->
             <div>
               <span> {{ appledUsers.length }} apple(s) </span>
               <button v-if="!appled" @click="addApple" class="btn btn-sm btn-danger"> apple </button>
+              <button v-else @click="removeApple" class="btn btn-sm btn-danger"> unapple </button>
             </div>
           </section>
           <!-- display main body -->
@@ -65,6 +72,7 @@ import NewComment from '../components/Comment/Form'
 
 import Error from "../components/404";
 import Loading from "../components/Loading";
+import { userConverter } from '../models/user';
 
 export default {
   beforeMount() {
@@ -96,10 +104,11 @@ export default {
         this.body = this.post.body
 
         // get the owner's display name
-        userCollection.doc(this.post.createdBy.id).get().then(snapshot => {
-          const { displayName } = snapshot.data()
-          this.owner = this.currentUser.uid === snapshot.id
+        userCollection.doc(this.post.createdBy.id).withConverter(userConverter).get().then(snapshot => {
+          const { id, displayName } = snapshot.data()
+          this.owner = this.currentUser.uid === id
           this.displayName = displayName
+          this.uid = id
         })
       }), // second promise
     ])
@@ -121,6 +130,7 @@ export default {
       topic: "",
       appledUsers: [],
       appled: true,
+      uid: "placeholder",
     }
   },
   created(){
@@ -173,10 +183,19 @@ export default {
     async addApple() {
       const newApple = await this.post.addApple({ createdBy: this.currentUserReference })
       if (!newApple.message) {
-        this.appled = true
         this.appledUsers.push(newApple)
+        this.appled = true
       } else {
         alert("Had trouble giving an apple! Must be your internet connection...")
+      }
+    },
+    async removeApple() {
+      const apple = this.appledUsers.find(x => x.createdBy.id == this.currentUserReference.id)
+      if(await this.post.removeApple(apple.id)) {
+        this.appledUsers = this.appledUsers.filter(x => x.id != apple.id)
+        this.appled = false
+      } else {
+        alert("Had trouble unappling! Must be your internet connection...")
       }
     }
   },
