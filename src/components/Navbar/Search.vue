@@ -21,7 +21,7 @@
         <router-link class="topic p-2" v-for="topic in topics" :key="topic.id" :to="{ name: 'Topic', params: { slug: topic.id } }"> 
           {{ topic.title }}
         </router-link>
-        <router-link class="topic" to="/topic/new"> New Topic </router-link>
+        <router-link class="create-topic text-center p-2" to="/topic/new"> New Topic </router-link>
       </div>
     </transition>
   </div>
@@ -96,5 +96,14 @@
     color: var(--eturo-main-pos4);
     text-decoration: none;
     background: var(--eturo-accent1);
+  }
+  .create-topic{
+    color: var(--eturo-main-pos1);
+    transition: 0.4s;
+  }
+  .create-topic:hover{
+    color: var(--eturo-contrast);
+    background-color: var(--eturo-main-pos2);
+    text-decoration: none;
   }
 </style>

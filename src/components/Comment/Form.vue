@@ -4,11 +4,13 @@
       <div class="form-group">
         <label> Comment </label>
         <textarea
-          placeholder="I think this is very interesting..."
+          placeholder="Write your reply..."
           v-model="body"
           class="form-control"
         />
-        <input type="submit" value="comment" class="btn btn-info mt-2"/>
+        <div class="d-flex justify-content-end">
+          <input type="submit" value="Post" class="btn btn-eturo btn-lg mt-2"/>
+        </div>
       </div>
     </form>
   </div>

@@ -20,10 +20,17 @@
             </h5>
             </div>
             <!-- apples -->
-            <div>
-              <span> {{ appledUsers.length }} apple(s) </span>
-              <button v-if="!appled" @click="addApple" class="btn btn-sm btn-danger"> apple </button>
-              <button v-else @click="removeApple" class="btn btn-sm btn-danger"> unapple </button>
+            <div v-if="!appled">
+              <span class=""> {{ appledUsers.length }} </span>
+              <a @click="addApple" class="btn p-0"> 
+                <img src="../assets/apple.svg" height="auto" width="25px">
+              </a>
+            </div>
+            <div v-else>
+              <span class="appled"> {{ appledUsers.length }} </span>
+              <a @click="removeApple" class="btn p-0"> 
+                <img src="../assets/apple.svg" height="auto" width="25px">
+              </a>
             </div>
           </section>
           <!-- display main body -->
@@ -213,5 +220,8 @@ export default {
   }.edit-button{
     right: 14px;
     top: 14px;
+  }
+  .appled{
+    color: var(--eturo-main-neg1);
   }
 </style>

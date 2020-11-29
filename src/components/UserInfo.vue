@@ -24,7 +24,11 @@
           <router-link class="cursor-pointer" to="/badgesinfo">
             <b-icon icon="question-circle"></b-icon>
           </router-link>
-          </label>
+      </label>
+      <div v-if="this.displayName == 'miss_sherry'" class="d-flex flex-row">
+        <img class="badge-profile" src="../assets/badges/formidable_expert.png">
+        <img class="badge-profile" src="../assets/badges/praiseworthy_proofreader.png">
+        </div>
       <!-- HR -->
       <hr class="hr-eturo p-1"/>
       <small class="text-right"> Joined {{ this.user.createdAt }} </small>
@@ -42,7 +46,7 @@
         <p class="text-center"> {{ stats.comments }} </p>
       </div>
       <div class="flex-fill p-3">
-        <h5 class="text-center">Apples Given</h5>
+        <h5 class="text-center">Apples</h5>
         <p class="text-center">{{ stats.apples }}</p>
       </div>
     </section>
@@ -106,8 +110,13 @@ export default {
   .hr-eturo{
     background: linear-gradient(15deg, var(--eturo-main), var(--eturo-accent1));
   }
-  .flex-fill:hover{
+  .flex-fill:hover{ 
     background: rgb(223, 223, 223);
     transition: 0.4s;
+  }
+  .badge-profile{
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: 2px;
   }
 </style>
