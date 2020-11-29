@@ -1,14 +1,15 @@
 <template>
   <div class="comment-slug card shadow m-1 p-3">
-      <div class="d-flex justify-content-between">
-        <h4> {{ displayName }} </h4>
-        <a class="a"
-        @click="$emit('destroy-comment', comment.id)"
-        v-if="owner"
-        > delete
-        </a>
-      </div>
-
+    <div class="d-flex justify-content-between">
+      <h4>
+        <router-link :to="{ name: 'Profile', params:{ uid: uid } }"> {{ displayName }} </router-link>
+      </h4>
+      <a class="a"
+      @click="$emit('destroy-comment', comment.id)"
+      v-if="owner"
+      > delete
+      </a>
+    </div>
     <span class="text-muted"> {{ comment.createdAt }} </span>
     <p class="text-truncate pl-4 pr-4"> {{ comment.body }} </p>
   </div>
@@ -23,15 +24,17 @@ export default {
   beforeMount() {
     userCollection.doc(this.comment.createdBy.id).withConverter(userConverter).get()
       .then(snapshot => {
-        const { displayName, id } = snapshot.data()
+        const { id, displayName } = snapshot.data()
         this.displayName = displayName
         this.owner = this.$store.getters.currentUser.uid === id
+        this.uid = id
       })
   },
   data() {
     return {
       owner: false,
       displayName: "",
+      uid: "placeholder",
     }
   },
 }

@@ -62,7 +62,7 @@
           </article>
           <section class="row mt-md-5 mt-2 mb-3">
             <div class="d-md-block d-none col-md-1"></div>
-            <div v-for="badge in badges" :key="index" class="col-md-1 col-6 badge-home-container d-flex justify-content-center">
+            <div v-for="badge, index in badges" :key="index" class="col-md-1 col-6 badge-home-container d-flex justify-content-center">
               <img class="badge-home" :src="require(`../assets/badges/${badge.icon}`)">
             </div>
           </section>
